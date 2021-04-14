@@ -1,0 +1,24 @@
+<div class="menu">
+    <button mat-button [matMenuTriggerFor]="menu">
+        <div class="menu-button">
+            <mat-icon class="menu-icone">person</mat-icon>
+        </div>
+        <div class="menu-nome-usuario">
+            Keven Allan
+        </div>
+    </button>
+    <div>
+        <mat-icon class="menu-icone">home</mat-icon>
+    </div>
+    <div>
+        <mat-form-field class="menu-pesquisar" appearance="fill">
+            <mat-label>Pesquisar</mat-label>
+            <input matInput type="text" >
+        </mat-form-field>
+    </div>      
+    <mat-menu #menu="matMenu" class="menu-itens">
+        <button mat-menu-item>Editar perfil</button>
+        <button mat-menu-item>Minhas postagens</button>
+        <button mat-menu-item>Sair</button>
+    </mat-menu>
+</div>
