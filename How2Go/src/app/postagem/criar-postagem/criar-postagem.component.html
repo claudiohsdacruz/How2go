@@ -1,0 +1,35 @@
+<div class="container">
+    <mat-card class="card-cadastro-postagem">
+        <mat-form-field appearance="fill">
+            <mat-label>Titulo</mat-label>
+            <input matInput [(ngModel)]="postagem.titulo">
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill">
+            <mat-label>Destino</mat-label>
+            <input matInput [(ngModel)]="postagem.destino">
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill">
+            <mat-label>Locais a visitar</mat-label>
+            <textarea matInput [(ngModel)]="postagem.locais_a_visitar"></textarea>
+        </mat-form-field>
+       
+        <mat-form-field appearance="fill">
+            <mat-label>Descrição</mat-label>
+            <textarea matInput [(ngModel)]="postagem.descricao"></textarea>
+        </mat-form-field>
+
+        <div>
+            <label for="arquivo">Enviar fotos</label>
+            <input type="file" id="arquivo">
+        </div>
+
+        <div class="example-button-container">
+            <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" (click)="inserirPostagem()">
+              <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    </mat-card>
+</div>
+

@@ -1,0 +1,44 @@
+.container {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.card-cadastro-postagem {
+    display: flex;
+    flex-direction: column;
+    padding-top: 3%;
+    align-items: center;
+    width: 50%;
+    
+}
+
+mat-form-field {
+    margin-top: 10px;
+    width: 60%;
+}
+
+input[type="file"]{
+    display:none;
+}
+label{
+    padding:20px 10px;
+    width:100px;
+    background: red;
+    display:block;
+    margin-top:10px;
+    text-align:center;
+    transition:.5;
+    cursor:pointer;
+
+}
+label:hover{
+    color:red;
+    background: white;
+}
+
+.example-button-container {
+    margin-top: 10px;
+    display: flex;
+    justify-items: end;
+}
