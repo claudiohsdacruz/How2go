@@ -4,4 +4,5 @@ export class Postagem {
     destino: string;
     locais_a_visitar: string;
     descricao: string;
+    foto: string;
 }

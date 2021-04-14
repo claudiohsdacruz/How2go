@@ -1,7 +1,7 @@
-.container {
-    margin-top: 15px;
+.container {    
     display: flex;
     justify-content: center;
+    background-color: rgb(223, 245, 245);
 }
 
 .card-cadastro-postagem {
@@ -9,8 +9,8 @@
     flex-direction: column;
     padding-top: 3%;
     align-items: center;
-    width: 50%;
-    
+    width: 50%;   
+    margin-top: 2%;
 }
 
 mat-form-field {
@@ -22,23 +22,34 @@ input[type="file"]{
     display:none;
 }
 label{
-    padding:20px 10px;
-    width:100px;
-    background: red;
+    font-size: 14px;
+    padding:15px 10px;
+    width:80px;
+    background: rgb(81, 165, 190);
     display:block;
     margin-top:10px;
     text-align:center;
     transition:.5;
     cursor:pointer;
-
+    border-radius: 5%;
 }
 label:hover{
-    color:red;
-    background: white;
+    background: rgb(120, 212, 212);
 }
 
 .example-button-container {
     margin-top: 10px;
     display: flex;
     justify-items: end;
+    position:absolute;
+    right:3%;
+    bottom: 0%;
+}
+
+.example-button-container button {
+    background-color: rgb(32, 121, 148);
+}
+
+.card-postagem{
+    width: 30%;
 }

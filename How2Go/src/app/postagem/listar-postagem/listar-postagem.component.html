@@ -1,10 +1,26 @@
-<mat-card *ngFor="let p of postagens" class="mat-card-listagem">
+<div class="card-postagem">
+  <mat-card class="example-card" *ngFor="let p of postagens">
     <mat-card-header>
-      <mat-card-title>
-        {{p.titulo}}</mat-card-title>
-      <mat-card-subtitle>CPF: {{p.destino}} Idade: {{p.descricao}}</mat-card-subtitle>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{p.titulo}}</mat-card-title>
+      <mat-card-subtitle>Destino: {{p.destino}}</mat-card-subtitle>   
     </mat-card-header>
+    <img mat-card-image src={{p.foto}}>
+    <mat-card-subtitle>Locais a visitar: {{p.locais_a_visitar}}</mat-card-subtitle>
     <mat-card-content>
-      Blablabla blaBlablabla blaBlablabla blaBlablabla blaBlablabla blaBlablabla blaBlablabla bla
+      <p>
+        {{p.descricao}}
+      </p>
     </mat-card-content>
-</mat-card>
+    <mat-card-actions class="card-buttons">
+      <button mat-raised-button>Comentar</button>
+      <button mat-raised-button><mat-icon>thumb_up</mat-icon></button>
+    </mat-card-actions>
+  </mat-card>
+  <div class="example-button-container">
+    <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" [routerLink]="['/criarPostagem']">
+      <mat-icon>add</mat-icon>
+    </button>
+</div>
+</div> 
+

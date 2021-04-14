@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { POSTAGENS } from 'src/app/shared/model/POSTAGENS';
+import {Postagem} from '../../shared/model/postagem';
+import { PostagemService } from 'src/app/shared/services/postagem.service';
 
 @Component({
   selector: 'app-listar-postagem',
@@ -8,15 +9,18 @@ import { POSTAGENS } from 'src/app/shared/model/POSTAGENS';
 })
 export class ListarPostagemComponent implements OnInit {
 
-  // postagens = [
-  //   {titulo: 'Usuario 1', destino: '123', locais_a_visitar: '40', descricao: 'aaaaaaaaaaa'},
-  // ];
+  postagens = Array<Postagem>();
 
-  postagens = POSTAGENS;
-
-  constructor() { }
+  constructor(private postagemService: PostagemService) { }
 
   ngOnInit(): void {
+    this.postagens = this.postagemService.listar();
   }
 
+  remover(postagem: Postagem): void {
+    const indxPostagemARemover = this.postagens.findIndex(p => p.id === postagem.id)
+    if (indxPostagemARemover > -1) {
+      this.postagens.splice(indxPostagemARemover, 1);
+    } 
+  }
 }

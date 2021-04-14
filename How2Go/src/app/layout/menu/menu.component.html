@@ -8,7 +8,9 @@
         </div>
     </button>
     <div>
-        <mat-icon class="menu-icone">home</mat-icon>
+        <button mat-icon-button aria-label="Example icon button with a home icon" [routerLink]="['/']">
+            <mat-icon class="home-button">home</mat-icon>
+        </button>
     </div>
     <div>
         <mat-form-field class="menu-pesquisar" appearance="fill">
@@ -18,7 +20,7 @@
     </div>      
     <mat-menu #menu="matMenu" class="menu-itens">
         <button mat-menu-item>Editar perfil</button>
-        <button mat-menu-item>Minhas postagens</button>
+        <button mat-menu-item [routerLink]="['/listarPostagens']">Minhas postagens</button>
         <button mat-menu-item>Sair</button>
     </mat-menu>
 </div>

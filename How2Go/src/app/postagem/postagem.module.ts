@@ -9,6 +9,7 @@ import {MatInputModule} from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ListarPostagemComponent } from './listar-postagem/listar-postagem.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ListarPostagemComponent } from './listar-postagem/listar-postagem.compo
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    RouterModule
   ]
 })
 export class PostagemModule { }

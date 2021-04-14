@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Postagem} from '../../shared/model/postagem';
-import {POSTAGENS} from '../../shared/model/POSTAGENS';
+import { PostagemService } from 'src/app/shared/services/postagem.service';
 
 @Component({
   selector: 'app-criar-postagem',
@@ -9,18 +9,16 @@ import {POSTAGENS} from '../../shared/model/POSTAGENS';
 })
 export class CriarPostagemComponent implements OnInit {
   postagem: Postagem;
-  postagens: Array<Postagem>;
 
-  constructor() {
+  constructor(private postagemService: PostagemService) {
     this.postagem = new Postagem();
-    this.postagens = POSTAGENS;
    }
 
   ngOnInit(): void {
   }
 
   inserirPostagem(): void {
-    this.postagens.push(this.postagem);
+    this.postagemService.inserir(this.postagem);
     this.postagem = new Postagem();
   }
 }

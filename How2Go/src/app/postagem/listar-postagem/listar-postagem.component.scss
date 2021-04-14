@@ -1,0 +1,24 @@
+.card-postagem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(227, 241, 238);
+}
+
+.example-card {
+    margin-top: 40px;
+    width: 35%;  
+}
+
+.example-button-container {
+    display: flex;
+    position: sticky;
+    align-self: flex-end;
+    bottom: 3%;
+    right: 3%;
+}
+
+.card-buttons {
+    display: flex;
+    justify-content: flex-end;
+}
