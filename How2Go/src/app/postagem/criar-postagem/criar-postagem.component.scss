@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     background-color: rgb(223, 245, 245);
+    height: 85vh;
 }
 
 .card-cadastro-postagem {
@@ -10,21 +11,36 @@
     padding-top: 3%;
     align-items: center;
     width: 50%;   
-    margin-top: 2%;
+    margin-top: 1%;
+    
 }
 
 mat-form-field {
-    margin-top: 10px;
+    margin-top: 8px;
     width: 60%;
 }
 
 input[type="file"]{
     display:none;
 }
-label{
-    font-size: 14px;
-    padding:15px 10px;
-    width:80px;
+
+.button-enviar-foto {
+    margin-top: 5px;
+    margin-left: 15px;
+    width: 60%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+label:first-child {
+    color: rgb(119, 118, 118);
+}
+
+mat-icon{
+    font-size: 20px;
+    padding: 5px 5px;
+    width:50px;
     background: rgb(81, 165, 190);
     display:block;
     margin-top:10px;
@@ -33,7 +49,7 @@ label{
     cursor:pointer;
     border-radius: 5%;
 }
-label:hover{
+mat-icon:hover{
     background: rgb(120, 212, 212);
 }
 
@@ -43,7 +59,7 @@ label:hover{
     justify-items: end;
     position:absolute;
     right:3%;
-    bottom: 0%;
+    bottom: 3%;
 }
 
 .example-button-container button {

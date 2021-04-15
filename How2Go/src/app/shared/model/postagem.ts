@@ -5,4 +5,5 @@ export class Postagem {
     locais_a_visitar: string;
     descricao: string;
     foto: string;
+    comentarios : Array<Array<string>>;
 }

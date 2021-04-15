@@ -20,14 +20,15 @@
             <textarea matInput [(ngModel)]="postagem.descricao"></textarea>
         </mat-form-field>
 
-        <div>
-            <label for="arquivo">Enviar fotos</label>
-            <input type="file" id="arquivo">
+        <div class="button-enviar-foto"> 
+            <label>Enviar Foto</label>
+            <label for="arquivo"><mat-icon>add_a_photo</mat-icon></label>
+            <input name="arquivo" type="file" id="arquivo">
         </div>
-
+         
         <div class="example-button-container">
-            <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" (click)="inserirPostagem()">
-              <mat-icon>add</mat-icon>
+            <button mat-raised-button color="primary" (click)="inserirPostagem()">
+              Cadastrar Postagem
             </button>
         </div>
     </mat-card>
