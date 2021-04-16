@@ -12,6 +12,7 @@ import { ListarPostagemComponent } from './listar-postagem/listar-postagem.compo
 import { RouterModule } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     RouterModule,
     MatMenuModule,
     MatExpansionModule,
+    MatDialogModule
   ]
 })
 export class PostagemModule { }

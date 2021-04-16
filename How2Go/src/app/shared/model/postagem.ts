@@ -4,6 +4,7 @@ export class Postagem {
     destino: string;
     locais_a_visitar: string;
     descricao: string;
-    foto: string;
+    icone: string;
+    foto: Array<string>;
     comentarios : Array<Array<string>>;
 }
