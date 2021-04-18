@@ -9,7 +9,7 @@
           <mat-icon>edit</mat-icon>
           <span>Editar postagem</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item (click)="remover(p)">
           <mat-icon>delete</mat-icon>
           <span>Excluir postagem</span>
         </button>
@@ -20,7 +20,9 @@
       <mat-card-subtitle>Destino: {{p.destino}}</mat-card-subtitle>   
     </mat-card-header>
     <img mat-card-image src={{p.foto[0]}} class="card-img"> 
-    <button mat-button (click)="openDialog()" *ngIf="p.foto.length > 1" class="button-verMais">Ver mais</button> 
+    <button mat-button (click)="openDialog(p)" *ngIf="p.foto.length > 1" class="button-verMais">
+      <mat-icon>collections</mat-icon>
+    </button> 
     <mat-card-subtitle>Locais a visitar: {{p.locais_a_visitar}}</mat-card-subtitle>
     <mat-card-content>
       <p>
@@ -31,21 +33,21 @@
     <div class="comentarios-buttons">
       <mat-form-field class="comentario-area">
         <mat-label>Digite o seu comentario</mat-label>
-        <textarea matInput></textarea>
+        <textarea matInput #comentario></textarea>
       </mat-form-field>
     <div>    
       <mat-card-actions class="card-buttons">
-        <button mat-raised-button color="primary">Comentar</button>
-        <button mat-raised-button class="comentario-like"><mat-icon>thumb_up</mat-icon></button>
+        <button mat-raised-button color="primary" (click)="inserirComentario(p,comentario.value)">Comentar</button>
+        <button mat-raised-button matBadge="{{p.like}}" matBadgeColor="primary" (click)="clickLike(p)" class="comentario-like"><mat-icon>thumb_up</mat-icon></button>
       </mat-card-actions>
     </div>
     </div>
     
     <mat-accordion class="example-headers-align" multi>
-      <mat-expansion-panel >
-        <mat-expansion-panel-header class="panel-exibir">
+      <mat-expansion-panel class="panel-exibir">
+        <mat-expansion-panel-header >
           <mat-panel-title>
-            Exibir todos os comentários
+            <span style="color: white;">Exibir todos os comentários</span>
           </mat-panel-title>
         </mat-expansion-panel-header>
     
@@ -53,7 +55,7 @@
           <mat-panel-title>
            {{c[0]}}
          </mat-panel-title>
-         <mat-panel-description>
+         <mat-panel-description style="margin-left: 5px; color: black;">
            {{c[1]}}
          </mat-panel-description>
        </div>

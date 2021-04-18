@@ -54,9 +54,17 @@
 }
 
 .mat-panel-comentario {
-    margin-top: 8px;
+    margin-top: 10px;
+    // border: solid 2px rgb(202, 213, 214);
+    // border-radius: 3%;
 }
 
 .panel-exibir {
-    background-color: rgb(120, 143, 192);
+    background-color: rgb(70, 144, 167);  
+}
+
+.button-verMais {
+    font-size: 40px;
+    position: absolute;
+    right: 0%;
 }

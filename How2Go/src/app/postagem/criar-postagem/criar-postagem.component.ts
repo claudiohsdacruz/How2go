@@ -11,18 +11,21 @@ import { Observable, Subscriber } from 'rxjs';
 export class CriarPostagemComponent implements OnInit {
   postagem: Postagem;
   fotos = new Array<string>();
-
+  
   constructor(private postagemService: PostagemService) {
     this.postagem = new Postagem();
+    this.postagem.icone='../../assets/postagem/logan.jpg';
    }
 
   ngOnInit(): void {
   }
-
+   
   inserirPostagem(): void {
     this.postagemService.inserir(this.postagem);
     this.postagem = new Postagem();
+    console.log(this.postagem)
   }
+
 
   //--------------------------------------------UPLOAD------------------------------------------
   onChange($event:Event){
@@ -35,10 +38,7 @@ export class CriarPostagemComponent implements OnInit {
     });
     observable.subscribe((d)=>{
       this.fotos.push(d);
-      console.log(file.name)
-      this.postagem.foto=this.fotos;
-      //console.log(this.postagem);
-      this.postagem.icone='../../assets/postagem/logan.jpg'
+      this.postagem.foto=this.fotos;   
     })
   }
   readFile(file:File, subscriber:Subscriber<any>){

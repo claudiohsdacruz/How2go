@@ -1,6 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Postagem} from '../../shared/model/postagem';
 import { PostagemService } from 'src/app/shared/services/postagem.service';
+import {MatDialog} from '@angular/material/dialog';
+import {AbrirImagemComponent} from '../abrir-imagem/abrir-imagem.component'
 
 @Component({
   selector: 'app-listar-postagem',
@@ -11,16 +13,30 @@ export class ListarPostagemComponent implements OnInit {
 
   postagens = Array<Postagem>();
 
-  constructor(private postagemService: PostagemService) { }
+  constructor(private postagemService: PostagemService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.postagens = this.postagemService.listar();
   }
 
+  openDialog(postagem: Postagem): void {
+    let dialogRef = this.dialog.open(AbrirImagemComponent, {
+      width: '1000px', height: '500px',
+      data: {
+        postagem
+      }
+    });
+  }
+
   remover(postagem: Postagem): void {
-    const indxPostagemARemover = this.postagens.findIndex(p => p.id === postagem.id)
-    if (indxPostagemARemover > -1) {
-      this.postagens.splice(indxPostagemARemover, 1);
-    } 
+    this.postagemService.remover(postagem);
+  }
+
+  inserirComentario(postagem:Postagem, comentario: string) {
+    this.postagemService.inserirComentario(postagem, comentario)
+  }
+
+  clickLike(postagem: Postagem): number {
+    return this.postagemService.clickLike(postagem);
   }
 }

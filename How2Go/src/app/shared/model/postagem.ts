@@ -7,4 +7,5 @@ export class Postagem {
     icone: string;
     foto: Array<string>;
     comentarios : Array<Array<string>>;
+    like: number = 0;
 }

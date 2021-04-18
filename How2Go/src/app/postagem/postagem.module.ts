@@ -13,11 +13,14 @@ import { RouterModule } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
+import { AbrirImagemComponent } from './abrir-imagem/abrir-imagem.component';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
     CriarPostagemComponent,
-    ListarPostagemComponent
+    ListarPostagemComponent,
+    AbrirImagemComponent
   ],
   exports: [
     CriarPostagemComponent,
@@ -36,7 +39,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     RouterModule,
     MatMenuModule,
     MatExpansionModule,
-    MatDialogModule
+    MatDialogModule,
+    MatBadgeModule,
   ]
 })
 export class PostagemModule { }

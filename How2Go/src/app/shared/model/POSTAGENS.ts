@@ -5,13 +5,12 @@ export const POSTAGENS = [
         destino: 'Fortaleza',
         locais_a_visitar: 'Beach Park, Praia do Futuro, Águas Belas, Morro Branco',
         descricao: 'Um ótimo lugar para se passar as férias em família ou com amigos. Belas praias e comidas gostosas.',
-        foto: ['../../../assets/postagem/fortaleza.jpg'],
+        foto: ['../../../assets/postagem/fortaleza.jpg', '../../assets/postagem/fortaleza2.jpg', '../../assets/postagem/fortaleza3.jpg'],
         icone: '../../assets/postagem/logan.jpg',
         comentarios: [
-            ['autor1','comentario1'],
-            ['autor1','comentario2'],
-            ['autor2','comentario1']      
-        ]
+            ['Autor 1','Lugar muito bonito para se ir no verão. Recomendo demais!'],      
+        ],
+        like: 0,
     },
     {
         id: 2,
@@ -19,9 +18,13 @@ export const POSTAGENS = [
         destino: 'Toronto',
         locais_a_visitar: 'CN Tower, Aquarium of Toronto, Casa Loma, Distillery Historic District',
         descricao: 'Toronto é um dos principais lugares para se conhecer no Canadá. Muitos viajantes creem que a capital do Canadá é Toronto, quando, na verdade, é a cidade de Ottawa. Provavelmente, esse erro ocorre por Toronto ser a maior cidade país e por sua vasta diversidade cultural.Uns dos cartões-postais da cidade são seus inúmeros arranha-céus, além das incríveis lojas em Yorkville e seus boêmios distritos, que são ideais para quem quer aproveitar a vida noturna local em uma das cidades mais modernas do mundo. Também é em Toronto que está localizada a CN Tower, a terceira maior torre do mundo, medindo 553 metros de altura. O destino é muito conhecido por sua segurança, o que deixa seus moradores e visitantes à vontade para caminhar despreocupados pelas ruas a qualquer hora do dia.',
-        foto: ['../../../assets/postagem/toronto.jpg'],
+        foto: ['../../../assets/postagem/toronto.jpg', '../../../assets/postagem/toronto2.jpg'],
         icone: '../../assets/postagem/logan.jpg',
-        comentarios : []
+        comentarios : [
+            ['Autor 1', 'A Nova York do Canadá'],
+            ['Autor 2', 'Muito bonita a cidade']
+        ],
+        like: 0,
     },
     {
         id: 3,
@@ -31,7 +34,8 @@ export const POSTAGENS = [
         descricao: 'Lá você vai encontrar incríveis formações rochosas, cânions, montanhas, campos verdes, vegetação espessa, rios, cachoeiras e vida selvagem diversa. Basicamente de tudo um pouco!',
         foto: ['../../../assets/postagem/madagascar.png'],
         icone: '../../assets/postagem/logan.jpg',
-        comentarios : []
+        comentarios : [],
+        like: 0,
     }
 ]
 
