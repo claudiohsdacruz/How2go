@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {LayoutModule} from './layout/layout.module';
 import {MatButtonModule} from '@angular/material/button';
 import {PostagemModule } from './postagem/postagem.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {PostagemModule } from './postagem/postagem.module';
     LayoutModule,    
     MatButtonModule,
     PostagemModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

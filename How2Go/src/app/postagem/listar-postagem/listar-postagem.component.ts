@@ -16,7 +16,9 @@ export class ListarPostagemComponent implements OnInit {
   constructor(private postagemService: PostagemService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.postagens = this.postagemService.listar();
+    this.postagemService.listar().subscribe(
+      postagens => this.postagens = postagens
+    );
   }
 
   openDialog(postagem: Postagem): void {
@@ -29,11 +31,16 @@ export class ListarPostagemComponent implements OnInit {
   }
 
   remover(postagem: Postagem): void {
-    this.postagemService.remover(postagem);
+    const indxPostagemARemover = this.postagens.findIndex(p => p.id === postagem.id)
+    if (indxPostagemARemover > -1) {
+      this.postagens.splice(indxPostagemARemover, 1);
+    } 
   }
 
-  inserirComentario(postagem:Postagem, comentario: string) {
-    this.postagemService.inserirComentario(postagem, comentario)
+  inserirComentario(postagem:Postagem,comentario:string):void{
+    this.postagemService.inserirComentario(postagem,comentario).subscribe(
+      ()=>undefined
+    );
   }
 
   clickLike(postagem: Postagem): number {
