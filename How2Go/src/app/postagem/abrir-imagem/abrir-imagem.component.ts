@@ -16,7 +16,6 @@ export class AbrirImagemComponent implements OnInit{
 
   ngOnInit(): void {
   }
-
-  
+ 
 }
 

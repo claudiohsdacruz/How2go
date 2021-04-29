@@ -1,5 +1,7 @@
+import { Usuario } from "./usuario";
+
 export class Postagem {
-    id: number;
+    id?: string;
     titulo: string;
     destino: string;
     locais_a_visitar: string;

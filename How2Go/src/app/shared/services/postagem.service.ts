@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscriber} from 'rxjs';
 import {Postagem} from '../../shared/model/postagem';
 
 
@@ -9,6 +9,7 @@ import {Postagem} from '../../shared/model/postagem';
 })
 export class PostagemService {
 
+  fotos: Array<string>;
   URL_POSTAGENS = 'http://localhost:3000/postagens';
 
   constructor(private httpClient : HttpClient) { 
@@ -19,15 +20,16 @@ export class PostagemService {
   }
 
   inserir(postagem: Postagem): Observable<Postagem> {
-    return this.httpClient.post<Postagem>(this.URL_POSTAGENS, postagem);
+    if(postagem.foto==undefined) {
+      postagem.foto=[]
+    }
+    postagem.comentarios = [];
+    return this.httpClient.post<Postagem>(this.URL_POSTAGENS, postagem);   
   }
 
-  // remover(postagem: Postagem): void {
-  //   const indxPostagemARemover = this.postagens.findIndex(p => p.id === postagem.id)
-  //   if (indxPostagemARemover > -1) {
-  //     this.postagens.splice(indxPostagemARemover, 1);
-  //   }   
-  // }
+  remover(id:number): Observable<object>{
+  return this.httpClient.delete(`${this.URL_POSTAGENS}/${id}`);
+  }
 
   inserirComentario(postagem:Postagem,comentario:string): Observable<Postagem>{
     postagem.comentarios.push(['Autor 1',comentario]);
@@ -38,10 +40,39 @@ export class PostagemService {
     if(postagem.like==0) {
       postagem.like+=1;
     }
-    else {
+    else{
       postagem.like-=1;
     }
     return postagem.like;
   }
  
+   //-----------------------------------UPLOAD FOTOS-----------------------------------
+   onChange($event:Event):Array<string>{
+    this.fotos=[];
+    const file =($event.target as HTMLInputElement).files;
+    for (let i=0;i<file.length;i++){
+      this.convertToBase64(file[i]);
+    }
+    return this.fotos;
+  }
+  convertToBase64(file:File){
+    const observable = new Observable((subscriber:Subscriber<any>)=>{
+      this.readFile(file,subscriber)
+    });
+    observable.subscribe((d)=>{
+      this.fotos.push(d);
+    })
+  }
+  readFile(file:File, subscriber:Subscriber<any>){
+    const filereader = new FileReader();
+    filereader.readAsDataURL(file);
+    filereader.onload=()=>{
+      subscriber.next(filereader.result);
+      subscriber.complete();
+    }
+    filereader.onerror=(error)=>{
+      subscriber.error(error);
+      subscriber.complete();
+    }
+  }
 }

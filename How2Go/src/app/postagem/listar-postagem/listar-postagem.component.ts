@@ -3,6 +3,9 @@ import {Postagem} from '../../shared/model/postagem';
 import { PostagemService } from 'src/app/shared/services/postagem.service';
 import {MatDialog} from '@angular/material/dialog';
 import {AbrirImagemComponent} from '../abrir-imagem/abrir-imagem.component'
+import { LogarUsuarioComponent } from 'src/app/usuario/logar-usuario/logar-usuario.component';
+import {DialogService} from '../../shared/services/dialog.service';
+import {PostagemFirestoreService} from 'src/app/shared/services/postagem-firestore.service';
 
 @Component({
   selector: 'app-listar-postagem',
@@ -12,29 +15,19 @@ import {AbrirImagemComponent} from '../abrir-imagem/abrir-imagem.component'
 export class ListarPostagemComponent implements OnInit {
 
   postagens = Array<Postagem>();
-
-  constructor(private postagemService: PostagemService, public dialog: MatDialog) { }
+  
+  constructor(private postagemService: PostagemFirestoreService, public dialog: MatDialog, private dialogService: DialogService) { }
 
   ngOnInit(): void {
+    this.dialogService.openDialogLoginUsuario();
+    
     this.postagemService.listar().subscribe(
       postagens => this.postagens = postagens
     );
   }
 
-  openDialog(postagem: Postagem): void {
-    let dialogRef = this.dialog.open(AbrirImagemComponent, {
-      width: '1000px', height: '500px',
-      data: {
-        postagem
-      }
-    });
-  }
-
-  remover(postagem: Postagem): void {
-    const indxPostagemARemover = this.postagens.findIndex(p => p.id === postagem.id)
-    if (indxPostagemARemover > -1) {
-      this.postagens.splice(indxPostagemARemover, 1);
-    } 
+  openDialogAbrirImagem(postagem: Postagem): void {
+    this.dialogService.openDialogAbrirImagem(postagem);
   }
 
   inserirComentario(postagem:Postagem,comentario:string):void{
@@ -46,4 +39,5 @@ export class ListarPostagemComponent implements OnInit {
   clickLike(postagem: Postagem): number {
     return this.postagemService.clickLike(postagem);
   }
+  
 }

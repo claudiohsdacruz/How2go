@@ -7,6 +7,8 @@ import {LayoutModule} from './layout/layout.module';
 import {MatButtonModule} from '@angular/material/button';
 import {PostagemModule } from './postagem/postagem.module';
 import { HttpClientModule } from '@angular/common/http';
+import { UsuarioModule } from './usuario/usuario.module';
+import {FirestoreModule} from './firestore/firestore.module'
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     PostagemModule,
     HttpClientModule,
+    UsuarioModule,
+    FirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

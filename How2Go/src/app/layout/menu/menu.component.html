@@ -4,7 +4,10 @@
             <mat-icon class="menu-icone">person</mat-icon>
         </div>
         <div class="menu-nome-usuario">
-            Fulano da Silva
+            {{usuario.nome}}
+         </div>
+        <div class="menu-nome-usuario" *ngIf="usuario.nome==undefined">
+            Login/Cadastre-se
         </div>
     </button>
     <div>
@@ -15,12 +18,21 @@
     <div>
         <mat-form-field class="menu-pesquisar" appearance="fill">
             <mat-label>Pesquisar</mat-label>
-            <input matInput type="text" >
+            <!-- <input matInput type="text" #inputBuscar>  -->
+            <input matInput type="text" (keyup)="filtrar(inputBuscar.value)" #inputBuscar>
         </mat-form-field>
-    </div>      
+    </div>    
+    
     <mat-menu #menu="matMenu" class="menu-itens">
-        <button mat-menu-item>Editar perfil</button>
-        <button mat-menu-item [routerLink]="['/listarPostagens']">Minhas postagens</button>
-        <button mat-menu-item>Sair</button>
+        <div *ngIf="usuario.nome!=undefined">
+            <button mat-menu-item>Editar perfil</button>
+            <button mat-menu-item [routerLink]="['/listarPostagens']">Minhas postagens</button>
+            <button mat-menu-item [routerLink]="['/cadastrarUsuario']">Sair</button>
+        </div>
+        <div *ngIf="usuario.nome==undefined">
+            <button mat-menu-item (click)="openDialogLoginUsuario()">Entrar</button>
+            <button mat-menu-item (click)="openDialogCadastroUsuario()">Criar conta</button>
+        </div>
     </mat-menu>
+  
 </div>

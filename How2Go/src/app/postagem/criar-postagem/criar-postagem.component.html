@@ -23,7 +23,7 @@
         <div class="button-enviar-foto"> 
             <label>Enviar Foto</label>
             <label for="arquivo"><mat-icon>add_a_photo</mat-icon></label>
-            <input name="arquivo" type="file" id="arquivo" (change)="onChange($event)">
+            <input name="arquivo" type="file" id="arquivo" multiple (change)="uploadFotos($event)">
         </div>
          
         <div class="example-button-container">
