@@ -35,8 +35,13 @@ input[type="file"]{
 
 }
 
-label:first-child {
-    color: rgb(119, 118, 118);
+.button-enviar-foto .arq {
+    display: flex;
+}
+
+.button-enviar-foto .arq .file{
+    align-self: center;
+    margin-left: 10%;
 }
 
 .add-foto{

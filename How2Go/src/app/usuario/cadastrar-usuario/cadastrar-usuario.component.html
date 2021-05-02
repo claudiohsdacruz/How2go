@@ -26,10 +26,15 @@
 
         <div class="button-enviar-foto"> 
           <label>Enviar Foto</label>
-          <label for="arquivo"><mat-icon class="add-foto">add_a_photo</mat-icon></label>
-          <input name="arquivo" type="file" id="arquivo" (change)="uploadFoto($event)">
+          
+          <div class="arq">
+            <label for="arquivo"><mat-icon class="add-foto">add_a_photo</mat-icon></label>
+            <input name="arquivo" type="file" id="arquivo" (change)="uploadFoto($event)">
+            <label for="arquivo" class="file">{{file}}</label>      
+          </div>
+          
         </div>
-       
+
         <div class="example-button-container">
            <button mat-raised-button color="primary" (click)="cadastrarUsuario()"> 
             Criar conta

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {from, Observable, Subscriber} from 'rxjs';
 import {Postagem} from '../model/postagem';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
+import { POSTAGENS_LISTAR } from '../model/postagens_listar';
  
 @Injectable({
  providedIn: 'root'
@@ -11,6 +12,7 @@ export class PostagemFirestoreService {
  colecaoPostagens: AngularFirestoreCollection<Postagem>;
  NOME_COLECAO = 'postagens';
  fotos: Array<string>;
+ postagens = POSTAGENS_LISTAR;
  
  constructor(private afs: AngularFirestore) {
    this.colecaoPostagens = afs.collection(this.NOME_COLECAO);
@@ -47,14 +49,16 @@ export class PostagemFirestoreService {
  
  atualizar(postagem: Postagem): Observable<void> {
    // removendo id pois não vamos guardar nos dados do documento, mas sim usar apenas como id para recuperar o documento
+   const id = postagem.id
    delete postagem.id;
-   return from(this.colecaoPostagens.doc(postagem.id).update(Object.assign({}, postagem)));
+   
+   return from(this.colecaoPostagens.doc(id).update(Object.assign({}, postagem)));
  }
 
  inserirComentario(postagem:Postagem,comentario:string): Observable<void>{
-    postagem.comentarios.push(['Autor 1',comentario]);
-    console.log(postagem.comentarios)
-    return from(this.colecaoPostagens.doc(postagem.id).update(postagem));
+    postagem.comentarios.push({"autor":"Autor 1","comentario":comentario});
+  
+    return this.atualizar(postagem);
   }
 
   clickLike(postagem: Postagem): number {
@@ -66,13 +70,27 @@ export class PostagemFirestoreService {
     }
     return postagem.like;
   }
+
+  pesquisar(pesquisa:string):void{
+    let posts =[]
+    const tamanho = this.postagens.length;
+    this.listar().subscribe(
+      postagens =>{
+        for(let post of postagens){
+          if (post.destino.toLowerCase().includes(pesquisa)){
+            posts.push(post)
+          }
+        }
+        for (let c = 0; c<tamanho; c++){
+          this.postagens.shift()
+        }
+        for (let post of posts){
+          this.postagens.push(post)
+        }
+      }
+    );
+    }
  
-//  listarMaioresDeIdade(): Observable<Usuario[]> {
-//    let usuariosMaioresIdade: AngularFirestoreCollection<Usuario>;
-//    // fazendo pesquisas usando o where. Um where pode ser encadeado com outro
-//    usuariosMaioresIdade = this.afs.collection(this.NOME_COLECAO, ref => ref.where('idade', '>', '17'));
-//    return usuariosMaioresIdade.valueChanges();
-//  }
 
    //-----------------------------------UPLOAD FOTOS-----------------------------------
    onChange($event:Event):Array<string>{

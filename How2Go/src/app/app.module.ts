@@ -8,11 +8,11 @@ import {MatButtonModule} from '@angular/material/button';
 import {PostagemModule } from './postagem/postagem.module';
 import { HttpClientModule } from '@angular/common/http';
 import { UsuarioModule } from './usuario/usuario.module';
-import {FirestoreModule} from './firestore/firestore.module'
+import {FirestoreModule} from './firestore/firestore.module';
 
 @NgModule({
   declarations: [
-    AppComponent,  
+    AppComponent,
   ],
   imports: [
     BrowserModule,

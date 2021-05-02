@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/shared/model/usuario';
-import { USUARIOS} from '../../shared/model/USUARIOS';
+import { UsuarioService } from 'src/app/shared/services/usuario-firestore.service';
+
 @Component({
   selector: 'app-cadastrar-usuario',
   templateUrl: './cadastrar-usuario.component.html',
@@ -8,27 +9,34 @@ import { USUARIOS} from '../../shared/model/USUARIOS';
 })
 export class CadastrarUsuarioComponent implements OnInit {
   usuario=new Usuario();
-  USUARIOS=USUARIOS;
   senha1:string;
   senha2:string;
+  file = '';
 
-  constructor() { 
+  constructor(private usuarioService: UsuarioService) { 
 
   }
 
   ngOnInit(): void {
   }
 
-  uploadFoto($event:Event){}
+  uploadFoto($event:Event) {
+    let files = ($event.target as HTMLInputElement).files;
+    this.file = files[0].name
+    this.usuarioService.uploadFoto($event).subscribe(
+      foto=> this.usuario.foto_perfil = foto
+    );
+  }
 
   cadastrarUsuario(){
-    if (this.usuario.foto_perfil==undefined){
-      this.usuario.foto_perfil='';
+    if (this.senha1===this.senha2){
+      this.usuario.senha = this.senha1;
+      this.usuario.postagem = [];
+      this.usuarioService.cadastrar(this.usuario)
     }
-    this.usuario.logado = true;
-    this.usuario.senha=this.senha1;
-    this.USUARIOS.push(this.usuario);
-    console.log(this.USUARIOS);
+    else{
+      console.log('senha invalida')
+    }
     this.usuario=new Usuario();
   }
 }

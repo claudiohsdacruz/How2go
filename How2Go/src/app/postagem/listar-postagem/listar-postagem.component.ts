@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Postagem} from '../../shared/model/postagem';
-import { PostagemService } from 'src/app/shared/services/postagem.service';
 import {MatDialog} from '@angular/material/dialog';
-import {AbrirImagemComponent} from '../abrir-imagem/abrir-imagem.component'
-import { LogarUsuarioComponent } from 'src/app/usuario/logar-usuario/logar-usuario.component';
 import {DialogService} from '../../shared/services/dialog.service';
 import {PostagemFirestoreService} from 'src/app/shared/services/postagem-firestore.service';
+import { POSTAGENS_LISTAR } from 'src/app/shared/model/postagens_listar';
+import {usuarioLogado} from '../../shared/model/usuario_logado';
 
 @Component({
   selector: 'app-listar-postagem',
@@ -14,15 +13,25 @@ import {PostagemFirestoreService} from 'src/app/shared/services/postagem-firesto
 })
 export class ListarPostagemComponent implements OnInit {
 
-  postagens = Array<Postagem>();
+  postagens = POSTAGENS_LISTAR;
+  usuario_logado = usuarioLogado;
   
-  constructor(private postagemService: PostagemFirestoreService, public dialog: MatDialog, private dialogService: DialogService) { }
+  constructor(private postagemService: PostagemFirestoreService, public dialog: MatDialog, private dialogService: DialogService) { 
+    
+  }
 
   ngOnInit(): void {
-    this.dialogService.openDialogLoginUsuario();
+    console.log(this.usuario_logado)
+    if(this.usuario_logado[0].email==undefined) {
+      this.dialogService.openDialogLoginUsuario();
+    } 
     
     this.postagemService.listar().subscribe(
-      postagens => this.postagens = postagens
+      postagens =>{
+        for(let post of postagens){
+          this.postagens.push(post)
+        }
+      }
     );
   }
 
@@ -38,6 +47,21 @@ export class ListarPostagemComponent implements OnInit {
 
   clickLike(postagem: Postagem): number {
     return this.postagemService.clickLike(postagem);
+  }
+
+  filtrar(value: string): void {
+    let posts: Postagem[]
+    posts = []
+    this.postagemService.listar().subscribe(
+      postagens=>{
+        for (let post of postagens){
+          if(post.destino.toLowerCase().includes(value)) {
+            posts.push(post)
+          }
+        }
+        this.postagens = posts
+      } 
+    )
   }
   
 }

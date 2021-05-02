@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/shared/model/usuario';
-import {PostagemService} from '../../shared/services/postagem.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
-import { Postagem } from 'src/app/shared/model/postagem';
+import { PostagemFirestoreService } from 'src/app/shared/services/postagem-firestore.service';
+import { POSTAGENS_LISTAR } from 'src/app/shared/model/postagens_listar';
+import {usuarioLogado} from '../../shared/model/usuario_logado';
+
 
 @Component({
   selector: 'app-menu',
@@ -11,16 +13,13 @@ import { Postagem } from 'src/app/shared/model/postagem';
 })
 
 export class MenuComponent implements OnInit {
-  usuario:Usuario; 
-  postagens: Postagem[];
+  usuario = usuarioLogado; 
+  postagens = POSTAGENS_LISTAR;
 
-  constructor(private postagemService: PostagemService, private dialogService: DialogService) { }
+  constructor(private postagemService: PostagemFirestoreService, private dialogService: DialogService) { }
+  
   ngOnInit(): void {
-    this.usuario=new Usuario();   
 
-    this.postagemService.listar().subscribe(
-      p=> this.postagens = p     
-    )
   }
 
   openDialogCadastroUsuario():void{
@@ -31,8 +30,11 @@ export class MenuComponent implements OnInit {
     this.dialogService.openDialogLoginUsuario();
   }
 
-  filtrar(value: string) {
-    // this.postagens.filter = value.trim().toLowerCase();
-    console.log(this.postagens)
+  filtrar(value: string): void {
+    this.postagemService.pesquisar(value);
+  } 
+  
+  voltar(){
+    window.scrollTo(0, 0);
   }
 }
