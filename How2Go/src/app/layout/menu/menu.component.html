@@ -26,7 +26,7 @@
         <div *ngIf="usuario[0].nome!=undefined">
             <button mat-menu-item>Editar perfil</button>
             <button mat-menu-item [routerLink]="['/listarPostagens']">Minhas postagens</button>
-            <button mat-menu-item [routerLink]="['/cadastrarUsuario']">Sair</button>
+            <button mat-menu-item (click)="sair()" [routerLink]="['/listarUsuario']">Sair</button>
         </div>
         <div *ngIf="usuario[0].nome==undefined">
             <button mat-menu-item (click)="openDialogLoginUsuario()">Entrar</button>

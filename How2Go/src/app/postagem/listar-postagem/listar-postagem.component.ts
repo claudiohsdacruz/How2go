@@ -21,15 +21,16 @@ export class ListarPostagemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.usuario_logado)
-    if(this.usuario_logado[0].email==undefined) {
-      this.dialogService.openDialogLoginUsuario();
-    } 
+    // if(this.usuario_logado[0].email==undefined) {
+    //   this.dialogService.openDialogLoginUsuario();
+    // } 
     
     this.postagemService.listar().subscribe(
       postagens =>{
         for(let post of postagens){
-          this.postagens.push(post)
+          
+            this.postagens.push(post)
+          
         }
       }
     );

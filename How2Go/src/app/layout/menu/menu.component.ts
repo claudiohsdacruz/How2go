@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from 'src/app/shared/model/usuario';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { PostagemFirestoreService } from 'src/app/shared/services/postagem-firestore.service';
 import { POSTAGENS_LISTAR } from 'src/app/shared/model/postagens_listar';
 import {usuarioLogado} from '../../shared/model/usuario_logado';
+import { UsuarioService } from 'src/app/shared/services/usuario-firestore.service';
 
 
 @Component({
@@ -16,7 +16,7 @@ export class MenuComponent implements OnInit {
   usuario = usuarioLogado; 
   postagens = POSTAGENS_LISTAR;
 
-  constructor(private postagemService: PostagemFirestoreService, private dialogService: DialogService) { }
+  constructor(private postagemService: PostagemFirestoreService, private dialogService: DialogService, private usuarioService: UsuarioService) { }
   
   ngOnInit(): void {
 
@@ -33,6 +33,10 @@ export class MenuComponent implements OnInit {
   filtrar(value: string): void {
     this.postagemService.pesquisar(value);
   } 
+
+  sair(): void {
+    this.usuarioService.sair();
+  }
   
   voltar(){
     window.scrollTo(0, 0);

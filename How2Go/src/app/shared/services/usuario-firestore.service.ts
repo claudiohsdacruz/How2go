@@ -43,10 +43,37 @@ export class UsuarioService {
     return from(this.colecaoUsuarios.add(Object.assign({}, usuario)));
   }
 
+  entrar(email:string,senha:string){
+    let usuario =[]
+    this.buscar(email).subscribe(
+      usuarioEncontrado=>{
+        usuario=usuarioEncontrado;
+        if (usuario.length!=0){
+          if (usuario[0].senha===senha){
+            this.usuario_logado.push(usuario[0])
+            this.usuario_logado.shift()
+          }else
+            window.alert('senha invalida')
+          }
+        else{
+          window.alert('email invalido')
+        }
+      }
+    );
+  }
 
-  // sair(usuario: Usuario): Observable<object> {
-    
-  // }
+  sair(){
+    const user =  {
+      id:undefined,
+      email:undefined,
+      senha: undefined,
+      nome: undefined,
+      foto_perfil: undefined,
+      postagem:undefined
+    }
+    this.usuario_logado.shift()
+    this.usuario_logado.push(user)
+  }
 
    //-----------------------------------UPLOAD FOTOS-----------------------------------
   

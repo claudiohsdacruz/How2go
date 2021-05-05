@@ -1,8 +1,8 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Usuario } from 'src/app/shared/model/usuario';
 import { DialogService } from 'src/app/shared/services/dialog.service';
-import { CadastrarUsuarioComponent } from '../cadastrar-usuario/cadastrar-usuario.component';
+import { UsuarioService } from 'src/app/shared/services/usuario-firestore.service';
+import {usuarioLogado} from  '../../shared/model/usuario_logado';
 
 @Component({
   selector: 'app-logar-usuario',
@@ -18,20 +18,21 @@ import { CadastrarUsuarioComponent } from '../cadastrar-usuario/cadastrar-usuari
 export class LogarUsuarioComponent implements OnInit {
   email:string;
   senha:string;
-  usuarioLogado=new Usuario();
+  usuario_logado = usuarioLogado;
 
-  constructor( public dialog: MatDialog, private dialogService: DialogService) { 
-    this.usuarioLogado.nome = 'bruna';
+  constructor( public dialog: MatDialog, private dialogService: DialogService, private usuarioService: UsuarioService) { 
+    
   }
 
   ngOnInit(): void {
+    
   }
   
-  getUsuarioLogado():Usuario{
-    return this.usuarioLogado;
-  }
   openDialogCadastroUsuario():void{
     this.dialogService.openDialogCadastroUsuario();
   }
-  logarUsuario(){}
+
+  entrar(email: string, senha: string){
+    this.usuarioService.entrar(email, senha)
+  }
 }
