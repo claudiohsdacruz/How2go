@@ -12,7 +12,7 @@
         
         <mat-form-field appearance="fill">
             <mat-label>Locais a visitar</mat-label>
-            <textarea matInput [(ngModel)]="postagem.locais_a_visitar"></textarea>
+            <textarea matInput [(ngModel)]="postagem.locais"></textarea>
         </mat-form-field>
        
         <mat-form-field appearance="fill">
@@ -27,7 +27,7 @@
         </div>
          
         <div class="example-button-container">
-            <button mat-raised-button color="primary" (click)="inserirPostagem()">
+            <button mat-raised-button style="background-color: rgb(253, 111, 60); color: white;"  (click)="inserirPostagem()">
               Cadastrar Postagem
             </button>
         </div>

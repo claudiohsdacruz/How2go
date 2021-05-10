@@ -2,8 +2,8 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: rgb(223, 245, 245);
-    height: 91.5vh;
+    background-color: rgb(45, 145, 175);
+    height: 100vh;
 }
 
 .card-cadastro-usuario {
@@ -17,7 +17,6 @@
 }
 
 mat-form-field {
-    margin-top: 8px;
     width: 70%;
 }
 

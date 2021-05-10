@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Postagem} from '../../shared/model/postagem';
-import {PostagemFirestoreService} from 'src/app/shared/services/postagem-firestore.service';
+// import {PostagemFirestoreService} from 'src/app/shared/services/postagem-firestore.service';
+import { PostagemService } from 'src/app/shared/services/postagem.service';
+import { usuarioLogado } from 'src/app/shared/model/usuario_logado';
 
 @Component({
   selector: 'app-criar-postagem',
@@ -10,23 +12,24 @@ import {PostagemFirestoreService} from 'src/app/shared/services/postagem-firesto
 export class CriarPostagemComponent implements OnInit {
   postagem: Postagem;
   fotos = new Array<string>();
+  usuario = usuarioLogado;
   
-  constructor(private postagemService: PostagemFirestoreService) {
+  constructor(private postagemService: PostagemService) {
     this.postagem = new Postagem();
-    this.postagem.icone='../../assets/postagem/logan.jpg';
    }
 
   ngOnInit(): void {
   }
    
   inserirPostagem(): void {
+    this.postagem.usuario = this.usuario[0];
+    // this.usuario[0].postagens.push(this.postagem);
     this.postagemService.inserir(this.postagem).subscribe(
-      usuario => console.log(usuario)
     );
     this.postagem = new Postagem();
   }
 
   uploadFotos($event:Event): void{
-    this.postagem.foto=this.postagemService.onChange($event);
+    this.postagem.fotos=this.postagemService.onChange($event);
   }
 }

@@ -1,7 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogService } from 'src/app/shared/services/dialog.service';
-import { UsuarioService } from 'src/app/shared/services/usuario-firestore.service';
+import { UsuarioService } from 'src/app/shared/services/usuario.service';
 import {usuarioLogado} from  '../../shared/model/usuario_logado';
 
 @Component({

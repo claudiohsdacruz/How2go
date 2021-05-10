@@ -1,11 +1,10 @@
 import { Postagem } from "./postagem";
 
 export class Usuario {
-    id?: string;
+    id: number;
     email: string;
     senha: string;
     nome: string;
-    foto_perfil: string;
-    logado: boolean;
-    postagem: Array<Postagem>;
+    foto: string;
+    postagens: Array<Postagem>;
 }

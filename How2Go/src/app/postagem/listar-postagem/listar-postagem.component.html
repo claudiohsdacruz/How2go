@@ -9,21 +9,21 @@
           <mat-icon>edit</mat-icon>
           <span>Editar postagem</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item (click)="remover(p)">
           <mat-icon>delete</mat-icon>
           <span>Excluir postagem</span>
         </button>
       </mat-menu>
-      <div mat-card-avatar class="example-header-image"><img mat-card-avatar src={{p.icone}}></div>
-      <mat-card-subtitle class="mat-card-nome">{{p.usuario}}</mat-card-subtitle>
+      <div mat-card-avatar class="example-header-image"><img mat-card-avatar src={{p.usuario.foto}}></div>
+      <mat-card-subtitle class="mat-card-nome">{{p.usuario.nome}}</mat-card-subtitle>
       <mat-card-title>{{p.titulo}}</mat-card-title>
       <mat-card-subtitle>Destino: {{p.destino}}</mat-card-subtitle>   
     </mat-card-header>
-    <img mat-card-image *ngIf="p.foto.length >= 1" src={{p.foto[0]}} class="card-img"> 
-    <button mat-button (click)="openDialogAbrirImagem(p)" *ngIf="p.foto.length > 1" class="button-verMais">
+    <img mat-card-image *ngIf="p.fotos.length >= 1" src={{p.fotos[0]}} class="card-img"> 
+    <button mat-button (click)="openDialogAbrirImagem(p)" *ngIf="p.fotos.length > 1" class="button-verMais">
       <mat-icon>collections</mat-icon>
     </button> 
-    <mat-card-subtitle>Locais a visitar: {{p.locais_a_visitar}}</mat-card-subtitle>
+    <mat-card-subtitle>Locais a visitar: {{p.locais}}</mat-card-subtitle>
     <mat-card-content>
       <p>
         {{p.descricao}}
@@ -51,12 +51,12 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
     
-        <div *ngFor="let c of p.comentarios" class="mat-panel-comentario">
-          <mat-panel-title>
-           {{c.autor}}
+        <div class="mat-panel-comentario" *ngFor="let c of p.comentarios; index as i">
+          <mat-panel-title *ngIf="i%2===0">
+           {{p.comentarios[i]}}
          </mat-panel-title>
-         <mat-panel-description style="margin-left: 5px; color: black;">
-           {{c.comentario}}
+         <mat-panel-description *ngIf="i%2===1" style="margin-left: 5px; color: black;">
+          {{p.comentarios[i]}}
          </mat-panel-description>
        </div>
       
@@ -67,7 +67,7 @@
     </mat-accordion> 
   </mat-card>
   <div class="example-button-container">
-    <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon"  [routerLink]="['/criarPostagem']">
+    <button mat-mini-fab color="primary" style="background-color: rgb(255, 98, 41);" aria-label="Example icon button with a menu icon"  [routerLink]="['/criarPostagem']">
       <mat-icon>add</mat-icon>
     </button>
 </div>

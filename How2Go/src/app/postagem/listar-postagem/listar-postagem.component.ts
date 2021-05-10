@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {Postagem} from '../../shared/model/postagem';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogService} from '../../shared/services/dialog.service';
-import {PostagemFirestoreService} from 'src/app/shared/services/postagem-firestore.service';
+// import {PostagemFirestoreService} from 'src/app/shared/services/postagem-firestore.service';
 import { POSTAGENS_LISTAR } from 'src/app/shared/model/postagens_listar';
 import {usuarioLogado} from '../../shared/model/usuario_logado';
+import { PostagemService } from 'src/app/shared/services/postagem.service';
 
 @Component({
   selector: 'app-listar-postagem',
@@ -16,7 +17,7 @@ export class ListarPostagemComponent implements OnInit {
   postagens = POSTAGENS_LISTAR;
   usuario_logado = usuarioLogado;
   
-  constructor(private postagemService: PostagemFirestoreService, public dialog: MatDialog, private dialogService: DialogService) { 
+  constructor(private postagemService: PostagemService, public dialog: MatDialog, private dialogService: DialogService) { 
     
   }
 
@@ -27,10 +28,11 @@ export class ListarPostagemComponent implements OnInit {
     
     this.postagemService.listar().subscribe(
       postagens =>{
-        for(let post of postagens){
-          
-            this.postagens.push(post)
-          
+        for(let p=0; p<this.postagens.length; p++) {
+          this.postagens.shift();
+        }
+        for(let post of postagens){        
+          this.postagens.push(post)
         }
       }
     );
@@ -40,10 +42,9 @@ export class ListarPostagemComponent implements OnInit {
     this.dialogService.openDialogAbrirImagem(postagem);
   }
 
-  inserirComentario(postagem:Postagem,comentario:string):void{
+  inserirComentario(postagem:Postagem,comentario:string):void{    
     this.postagemService.inserirComentario(postagem,comentario).subscribe(
-      ()=>undefined
-    );
+    );   
   }
 
   clickLike(postagem: Postagem): number {
@@ -62,6 +63,17 @@ export class ListarPostagemComponent implements OnInit {
         }
         this.postagens = posts
       } 
+    )
+  }
+
+  remover(postagem: Postagem): void {
+    this.postagemService.remover(postagem.id).subscribe(
+      ()=>{
+        const indxPostagemARemover = this.postagens.findIndex(p => p.id === postagem.id)
+        if (indxPostagemARemover > -1) {
+          this.postagens.splice(indxPostagemARemover, 1);
+        }
+      }
     )
   }
   

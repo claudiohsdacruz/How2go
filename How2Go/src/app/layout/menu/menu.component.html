@@ -11,14 +11,14 @@
         </div>
     </button>
     <div>
-        <button mat-icon-button aria-label="Example icon button with a home icon" [routerLink]="['/']">
-            <mat-icon class="home-button" (click)="voltar()">home</mat-icon>
+        <button mat-icon-button class="menu-button" [routerLink]="['/']">
+            <img src="../../../assets/logo.png" class="logo" (click)="voltar()" >
         </button>
     </div>
     <div>
         <mat-form-field class="menu-pesquisar" appearance="fill">
             <mat-label>Pesquisar por destino</mat-label>
-            <input matInput type="text" (keyup)="filtrar(inputBuscar.value)" #inputBuscar>
+            <input matInput type="text" #inputBuscar>
         </mat-form-field>
     </div>    
     

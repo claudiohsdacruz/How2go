@@ -1,14 +1,13 @@
 import { Usuario } from "./usuario";
 
 export class Postagem {
-    id?: string;
-    usuario: string;
+    id: number;
+    usuario: Usuario;
     titulo: string;
     destino: string;
-    locais_a_visitar: string;
+    locais: string;
     descricao: string;
-    icone: string;
-    foto: Array<string>;
-    comentarios : Array<{}>;
+    fotos: Array<string>;
+    comentarios : Array<string>;
     like: number = 0;
 }
