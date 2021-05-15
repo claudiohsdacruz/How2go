@@ -12,7 +12,7 @@ import { UsuarioService } from './usuario.service';
 export class PostagemService {
 
   fotos: Array<string>;
-  URL_POSTAGENS = 'http://localhost:8080/postagens';
+  URL_POSTAGENS = 'http://localhost:8080/postagens/';
   usuario_logado = usuarioLogado;
   
   constructor(private httpClient : HttpClient, private usuarioService : UsuarioService) { 
@@ -33,6 +33,7 @@ export class PostagemService {
         if(usuario.email==this.usuario_logado[0].email) {
           usuario.postagens.push(postagem)
           this.usuarioService.atualizar(usuario);
+          postagem.usuario = usuario;
         }
       }
       }
@@ -41,13 +42,13 @@ export class PostagemService {
   }
 
   remover(id:number): Observable<object>{
-    return this.httpClient.delete(`${this.URL_POSTAGENS}/${id}`);
+    return this.httpClient.delete(`${this.URL_POSTAGENS}${id}`);
   }
 
   inserirComentario(postagem:Postagem,comentario:string): Observable<Postagem>{
-    postagem.comentarios.push('Autor 1', comentario);
-    console.log(postagem.comentarios)
-    return this.httpClient.put<Postagem>(`${this.URL_POSTAGENS}/${postagem.id}`,postagem)
+    postagem.comentarios.push(this.usuario_logado[0].nome);
+    postagem.comentarios.push(comentario);
+    return this.httpClient.put<Postagem>(`${this.URL_POSTAGENS}`,postagem)
   }
 
   clickLike(postagem: Postagem): number {

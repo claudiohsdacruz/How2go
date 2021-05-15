@@ -13,7 +13,7 @@ export class DialogService {
   constructor(public dialog: MatDialog) { }
 
   openDialogAbrirImagem(postagem: Postagem): void {
-    let dialogRef = this.dialog.open(AbrirImagemComponent, {
+    this.dialog.open(AbrirImagemComponent, {
       width: '1000px', height: '500px',
       data: {
         postagem
@@ -22,14 +22,15 @@ export class DialogService {
   }
 
   openDialogLoginUsuario():void{
-    let dialogRef = this.dialog.open(LogarUsuarioComponent,{
+    this.dialog.open(LogarUsuarioComponent,{
       width: '600px', height: '425px'
     })
   }
 
   openDialogCadastroUsuario():void{
-    let dialogRef = this.dialog.open(CadastrarUsuarioComponent,{
+    this.dialog.open(CadastrarUsuarioComponent,{
       width: '800px', height: '620px'
     })
   }
+
 }

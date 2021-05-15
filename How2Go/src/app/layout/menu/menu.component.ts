@@ -14,13 +14,20 @@ import { PostagemService } from 'src/app/shared/services/postagem.service';
 })
 
 export class MenuComponent implements OnInit {
-  usuario = usuarioLogado; 
+  usuario_logado = usuarioLogado; 
   postagens = POSTAGENS_LISTAR;
 
-  constructor(private postagemService: PostagemService, private dialogService: DialogService, private usuarioService: UsuarioService) { }
+  constructor(private dialogService: DialogService, private usuarioService: UsuarioService) { }
   
   ngOnInit(): void {
-  
+    console.log(this.usuario_logado)
+    let id = localStorage.getItem("id");
+    if(id!='0') {
+      let id2 = parseInt(id);
+      this.usuarioService.getUsuario(id2).subscribe(
+        usuario => {this.usuario_logado.push(usuario); this.usuario_logado.shift()}   
+      );
+    }
   }
 
   openDialogCadastroUsuario():void{

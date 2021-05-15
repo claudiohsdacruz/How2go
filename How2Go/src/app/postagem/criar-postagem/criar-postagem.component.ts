@@ -22,9 +22,10 @@ export class CriarPostagemComponent implements OnInit {
   }
    
   inserirPostagem(): void {
-    this.postagem.usuario = this.usuario[0];
-    // this.usuario[0].postagens.push(this.postagem);
+    this.postagem.usuario = this.usuario[0];  
     this.postagemService.inserir(this.postagem).subscribe(
+     postagem=> {this.usuario[0].postagens.push(postagem); console.log(this.usuario);
+      console.log(this.postagem)}
     );
     this.postagem = new Postagem();
   }

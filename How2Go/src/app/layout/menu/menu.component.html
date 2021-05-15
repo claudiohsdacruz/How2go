@@ -4,9 +4,9 @@
             <mat-icon class="menu-icone">person</mat-icon>
         </div>
         <div class="menu-nome-usuario">
-            {{usuario[0].nome}}
+            {{usuario_logado[0].nome | titlecase}}
          </div>
-        <div class="menu-nome-usuario" *ngIf="usuario[0].nome==undefined">
+        <div class="menu-nome-usuario" *ngIf="usuario_logado[0].nome==undefined">
             Login/Cadastre-se
         </div>
     </button>
@@ -23,12 +23,12 @@
     </div>    
     
     <mat-menu #menu="matMenu" class="menu-itens">
-        <div *ngIf="usuario[0].nome!=undefined">
+        <div *ngIf="usuario_logado[0].nome!=undefined">
             <button mat-menu-item>Editar perfil</button>
             <button mat-menu-item [routerLink]="['/listarPostagens']">Minhas postagens</button>
             <button mat-menu-item (click)="sair()" [routerLink]="['/listarUsuario']">Sair</button>
         </div>
-        <div *ngIf="usuario[0].nome==undefined">
+        <div *ngIf="usuario_logado[0].nome==undefined">
             <button mat-menu-item (click)="openDialogLoginUsuario()">Entrar</button>
             <button mat-menu-item (click)="openDialogCadastroUsuario()">Criar conta</button>
         </div>

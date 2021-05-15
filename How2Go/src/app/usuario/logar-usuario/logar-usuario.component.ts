@@ -1,5 +1,5 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { UsuarioService } from 'src/app/shared/services/usuario.service';
 import {usuarioLogado} from  '../../shared/model/usuario_logado';
@@ -20,7 +20,7 @@ export class LogarUsuarioComponent implements OnInit {
   senha:string;
   usuario_logado = usuarioLogado;
 
-  constructor( public dialog: MatDialog, private dialogService: DialogService, private usuarioService: UsuarioService) { 
+  constructor( public dialog: MatDialog, private dialogService: DialogService, public dialogRef: MatDialogRef<DialogService>, private usuarioService: UsuarioService) { 
     
   }
 
@@ -34,5 +34,6 @@ export class LogarUsuarioComponent implements OnInit {
 
   entrar(email: string, senha: string){
     this.usuarioService.entrar(email, senha)
+    this.dialogRef.close();  
   }
 }

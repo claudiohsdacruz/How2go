@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class UsuarioService {
-  URL_USUARIOS="http://localhost:8080/usuarios";
+  URL_USUARIOS="http://localhost:8080/usuarios/";
   usuario_logado= usuarioLogado;
   usuario = new Usuario();
   foto: Observable<any>;
@@ -22,20 +22,22 @@ export class UsuarioService {
   }
 
   getUsuario(id: number): Observable<Usuario> {
-    return this.httpClient.get<Usuario>(`${this.URL_USUARIOS}/${id}`);
+    return this.httpClient.get<Usuario>(`${this.URL_USUARIOS}${id}`);
   }
 
-  entrar(email: string, senha: string): Observable<Usuario> {
+  entrar(email: string, senha: string):void {
     this.listar().subscribe(
       usuarios => {for(let usuario of usuarios) {
                     if(usuario.email==email) {
                       this.usuario_logado.shift()
                       this.usuario_logado.push(usuario)
+                      let id = usuario.id.toString();
+                      localStorage.setItem("id", id)
+                      
                     }
                   }
       }
     );
-    return this.httpClient.get<Usuario>(`${this.URL_USUARIOS}/${email}`);
  }
 
   cadastrar(usuario: Usuario): Observable<Usuario> {
@@ -43,23 +45,14 @@ export class UsuarioService {
       usuario.foto = '../../../assets/usuario/default.png'
     }
     this.usuario_logado.shift();
-    this.usuario_logado.push(this.usuario);   
+    this.usuario_logado.push(usuario);   
+    console.log(this.usuario_logado)
     return this.httpClient.post<Usuario>(this.URL_USUARIOS, usuario);   
   }
 
   atualizar(usuario: Usuario): Observable<Usuario> {
-    return this.httpClient.put<Usuario>(`${this.URL_USUARIOS}/${usuario.id}`, usuario)
+    return this.httpClient.put<Usuario>(`${this.URL_USUARIOS}${usuario.id}`, usuario)
   }
-
-  // entrar(email:string,senha:string){
-  //   let usuario =new Usuario();
-  //   this.buscar(email).subscribe(
-  //     usuarioEncontrado=>{
-  //       usuario=usuarioEncontrado;
-  //       console.log(usuarioEncontrado)
-  //     }
-  //   );
-  // }
 
   sair(){
     const user =  {
@@ -72,6 +65,7 @@ export class UsuarioService {
     }   
     this.usuario_logado.push(user)
     this.usuario_logado.shift()
+    localStorage.setItem("id", "0")
   }
 
    //-----------------------------------UPLOAD FOTOS-----------------------------------

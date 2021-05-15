@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Postagem } from 'src/app/shared/model/postagem';
 import { Usuario } from 'src/app/shared/model/usuario';
 import { usuarioLogado } from 'src/app/shared/model/usuario_logado';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 import { UsuarioService } from 'src/app/shared/services/usuario.service';
 
 @Component({
@@ -15,7 +18,7 @@ export class CadastrarUsuarioComponent implements OnInit {
   file = '';
   usuario_logado = usuarioLogado;
 
-  constructor(private usuarioService: UsuarioService) { 
+  constructor(private usuarioService: UsuarioService, public dialogRef: MatDialogRef<DialogService>) { 
 
   }
 
@@ -26,21 +29,23 @@ export class CadastrarUsuarioComponent implements OnInit {
     let files = ($event.target as HTMLInputElement).files;
     this.file = files[0].name
     this.usuarioService.uploadFoto($event).subscribe(
-      foto=> this.usuario.foto = foto 
+      foto=> this.usuario.foto= foto 
     );
   }
 
   cadastrarUsuario(){
+    this.usuario.nome = this.usuario.nome.toLowerCase();
     if (this.senha1===this.senha2){
       this.usuario.senha = this.senha1;
-      this.usuario.postagens = [];
+      this.usuario.postagens = new Array<Postagem>();
       this.usuarioService.cadastrar(this.usuario).subscribe(
-        () => undefined
+        usuario => {let id = usuario.id.toString(); localStorage.setItem("id", id)}
       );
     }
     else{
       console.log('senha invalida')
     }
+    this.dialogRef.close();  
     this.usuario=new Usuario();
   }
 }

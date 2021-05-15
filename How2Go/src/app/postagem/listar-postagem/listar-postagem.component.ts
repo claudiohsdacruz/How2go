@@ -21,11 +21,7 @@ export class ListarPostagemComponent implements OnInit {
     
   }
 
-  ngOnInit(): void {
-    // if(this.usuario_logado[0].email==undefined) {
-    //   this.dialogService.openDialogLoginUsuario();
-    // } 
-    
+  ngOnInit(): void {  
     this.postagemService.listar().subscribe(
       postagens =>{
         for(let p=0; p<this.postagens.length; p++) {
@@ -34,7 +30,10 @@ export class ListarPostagemComponent implements OnInit {
         for(let post of postagens){        
           this.postagens.push(post)
         }
-      }
+        if(this.usuario_logado[0].email==undefined) {
+          this.dialogService.openDialogLoginUsuario();
+        } 
+      }     
     );
   }
 
@@ -43,8 +42,10 @@ export class ListarPostagemComponent implements OnInit {
   }
 
   inserirComentario(postagem:Postagem,comentario:string):void{    
-    this.postagemService.inserirComentario(postagem,comentario).subscribe(
-    );   
+    if(this.usuario_logado[0].id!=undefined) {
+      this.postagemService.inserirComentario(postagem,comentario).subscribe(
+        ); 
+    }    
   }
 
   clickLike(postagem: Postagem): number {
