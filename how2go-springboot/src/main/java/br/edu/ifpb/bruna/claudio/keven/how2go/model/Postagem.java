@@ -12,24 +12,22 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
-
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
+// @JsonIdentityInfo(scope = Postagem.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "idPostagem")
 @Entity
 public class Postagem {
 
    @Id
-   @GeneratedValue(strategy = GenerationType.AUTO)
-   private Long id;
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private Long idPostagem;
    private String titulo;
    private String destino;
    private String descricao;
-   private String locais_a_visitar;
+   private String locais;
    private String[] fotos;
    private String[] comentarios;
 	
-
-	@ManyToOne
-   	@JoinColumn(name="usuario_id")
+   @ManyToOne
+   @JoinColumn(name="usuario_id")
    private Usuario usuario;
 
    public Postagem() {};
@@ -42,11 +40,11 @@ public class Postagem {
 		this.usuario = usuario;
 	}
 
-   	public Long getId() {
-		return id;
+   	public Long getIdPostagem() {
+		return idPostagem;
 	}
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdPostagem(Long id) {
+		this.idPostagem = id;
 	}
 
 	public String getTitulo() {
@@ -67,11 +65,11 @@ public class Postagem {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public String getLocais_a_visitar() {
-		return locais_a_visitar;
+	public String getLocais() {
+		return locais;
 	}
-	public void setLocais_a_visitar(String locais_a_visitar) {
-		this.locais_a_visitar = locais_a_visitar;
+	public void setLocais(String locais) {
+		this.locais = locais;
 	}
 	public String[] getFotos() {
 		return fotos;
@@ -88,8 +86,8 @@ public class Postagem {
 
 	@Override
 	public String toString() {
-		return "Postagem [id=" + id + ", titulo=" + titulo + ", destino=" + destino + ", descricao=" + descricao
-				+ ", locais_a_visitar=" + locais_a_visitar + ", fotos=" + Arrays.toString(fotos) + ", comentarios="
+		return "Postagem [id=" + idPostagem + ", titulo=" + titulo + ", destino=" + destino + ", descricao=" + descricao
+				+ ", locais_a_visitar=" + locais + ", fotos=" + Arrays.toString(fotos) + ", comentarios="
 				+ Arrays.toString(comentarios) + ", usuario=" + usuario + "]";
 	}
 

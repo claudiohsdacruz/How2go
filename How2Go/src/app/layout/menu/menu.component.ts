@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogService } from 'src/app/shared/services/dialog.service';
-// import { PostagemFirestoreService } from 'src/app/shared/services/postagem-firestore.service';
 import { POSTAGENS_LISTAR } from 'src/app/shared/model/postagens_listar';
 import {usuarioLogado} from '../../shared/model/usuario_logado';
 import { UsuarioService } from 'src/app/shared/services/usuario.service';
-import { PostagemService } from 'src/app/shared/services/postagem.service';
 
 
 @Component({
@@ -20,12 +18,19 @@ export class MenuComponent implements OnInit {
   constructor(private dialogService: DialogService, private usuarioService: UsuarioService) { }
   
   ngOnInit(): void {
-    console.log(this.usuario_logado)
     let id = localStorage.getItem("id");
     if(id!='0') {
       let id2 = parseInt(id);
       this.usuarioService.getUsuario(id2).subscribe(
-        usuario => {this.usuario_logado.push(usuario); this.usuario_logado.shift()}   
+        usuario => {
+          if(usuario) {
+            this.usuario_logado.push(usuario); 
+            this.usuario_logado.shift()
+          }  
+          else {
+            localStorage.setItem("id","0")
+          }
+        }
       );
     }
   }

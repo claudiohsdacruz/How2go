@@ -1,7 +1,7 @@
 import { Postagem } from "./postagem";
 
 export class Usuario {
-    id: number;
+    idUsuario: number;
     email: string;
     senha: string;
     nome: string;

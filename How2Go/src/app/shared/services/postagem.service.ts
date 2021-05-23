@@ -28,16 +28,6 @@ export class PostagemService {
       postagem.fotos=[]
     }
     postagem.comentarios = [];
-    this.usuarioService.listar().subscribe(
-      usuarios => {for(let usuario of usuarios) {
-        if(usuario.email==this.usuario_logado[0].email) {
-          usuario.postagens.push(postagem)
-          this.usuarioService.atualizar(usuario);
-          postagem.usuario = usuario;
-        }
-      }
-      }
-    )
     return this.httpClient.post<Postagem>(this.URL_POSTAGENS, postagem);   
   }
 
@@ -62,7 +52,7 @@ export class PostagemService {
   }
  
    //-----------------------------------UPLOAD FOTOS-----------------------------------
-   onChange($event:Event):Array<string>{
+   uploadFotos($event:Event):Array<string>{
     this.fotos=[];
     const file =($event.target as HTMLInputElement).files;
     for (let i=0;i<file.length;i++){

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {Postagem} from '../../shared/model/postagem';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogService} from '../../shared/services/dialog.service';
-// import {PostagemFirestoreService} from 'src/app/shared/services/postagem-firestore.service';
 import { POSTAGENS_LISTAR } from 'src/app/shared/model/postagens_listar';
 import {usuarioLogado} from '../../shared/model/usuario_logado';
 import { PostagemService } from 'src/app/shared/services/postagem.service';
@@ -24,7 +23,7 @@ export class ListarPostagemComponent implements OnInit {
   ngOnInit(): void {  
     this.postagemService.listar().subscribe(
       postagens =>{
-        for(let p=0; p<this.postagens.length; p++) {
+        for(let p=0; p<=this.postagens.length; p++) {
           this.postagens.shift();
         }
         for(let post of postagens){        
@@ -42,7 +41,7 @@ export class ListarPostagemComponent implements OnInit {
   }
 
   inserirComentario(postagem:Postagem,comentario:string):void{    
-    if(this.usuario_logado[0].id!=undefined) {
+    if(this.usuario_logado[0].idUsuario!=undefined) {
       this.postagemService.inserirComentario(postagem,comentario).subscribe(
         ); 
     }    
@@ -68,9 +67,9 @@ export class ListarPostagemComponent implements OnInit {
   }
 
   remover(postagem: Postagem): void {
-    this.postagemService.remover(postagem.id).subscribe(
+    this.postagemService.remover(postagem.idPostagem).subscribe(
       ()=>{
-        const indxPostagemARemover = this.postagens.findIndex(p => p.id === postagem.id)
+        const indxPostagemARemover = this.postagens.findIndex(p => p.idPostagem === postagem.idPostagem)
         if (indxPostagemARemover > -1) {
           this.postagens.splice(indxPostagemARemover, 1);
         }

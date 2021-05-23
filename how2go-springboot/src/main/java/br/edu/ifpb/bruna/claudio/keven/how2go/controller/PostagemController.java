@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/postagens")
+@RequestMapping("/postagens/")
 public class PostagemController {
 
    @Autowired
@@ -46,7 +46,7 @@ public class PostagemController {
        return this.postagemService.inserirOuAtualizar(postagem);
    }
 
-   @DeleteMapping("/{id}")
+   @DeleteMapping("{id}")
    public void apagarPostagem(@PathVariable("id") Long id) {
        this.postagemService.apagar(id);
    }

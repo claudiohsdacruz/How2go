@@ -26,16 +26,27 @@ input[type="file"]{
 
 .button-enviar-foto {
     margin-top: 5px;
-    margin-left: 15px;
-    width: 60%;
+    margin-left: 10px;
+    width: 70%;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
+
 }
 
-label:first-child {
-    color: rgb(119, 118, 118);
+.button-enviar-foto .arq {
+    display: flex;
 }
+
+.button-enviar-foto .arq .file{
+    align-self: center;
+    margin-left: 10%;
+}
+
+// label:first-child {
+//     color: rgb(119, 118, 118);
+// }
+
 
 mat-icon{
     font-size: 20px;

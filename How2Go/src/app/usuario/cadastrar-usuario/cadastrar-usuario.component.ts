@@ -39,7 +39,7 @@ export class CadastrarUsuarioComponent implements OnInit {
       this.usuario.senha = this.senha1;
       this.usuario.postagens = new Array<Postagem>();
       this.usuarioService.cadastrar(this.usuario).subscribe(
-        usuario => {let id = usuario.id.toString(); localStorage.setItem("id", id)}
+        usuario => {let id = usuario.idUsuario.toString(); localStorage.setItem("id", id); this.usuarioService.entrar(usuario.email, usuario.senha)}
       );
     }
     else{

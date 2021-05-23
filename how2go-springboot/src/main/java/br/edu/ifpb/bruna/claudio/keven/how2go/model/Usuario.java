@@ -8,37 +8,38 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
+// @JsonIdentityInfo(scope = Usuario.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "idUsuario") 
 @Entity
 public class Usuario {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idUsuario;
     private String email;
     private String senha;
     private String nome;
     @Lob
     private String foto;
     
+    @JsonIgnore
     @OneToMany (cascade=CascadeType.ALL, orphanRemoval = true, mappedBy = "usuario")
     private List<Postagem> postagens = new ArrayList<>();
 
     public Usuario() {};
     
-    public Long getId() {
-        return this.id;
+    public Long getidUsuario() {
+        return this.idUsuario;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setidUsuario(Long id) {
+        this.idUsuario= id;
     }
 
     public String getEmail() {
@@ -73,17 +74,19 @@ public class Usuario {
         this.foto = foto;
     }
 
+    @JsonIgnore
     public List<Postagem> getPostagens(){
         return this.postagens;
     }
 
+    @JsonProperty
     public void setPostagens(List<Postagem> postagens){
         this.postagens = postagens;
     }
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", email=" + email + ", senha=" + senha + ", nome=" + nome + ", foto_perfil="
+		return "Usuario [id=" + idUsuario + ", email=" + email + ", senha=" + senha + ", nome=" + nome + ", foto_perfil="
 				+ foto + ", postagens=" + postagens + "]";
 	}
 

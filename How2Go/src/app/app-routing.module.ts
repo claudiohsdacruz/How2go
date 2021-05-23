@@ -20,6 +20,10 @@ const routes: Routes = [
   {
     path: 'cadastrarUsuario',
     component: CadastrarUsuarioComponent
+  },
+  {
+    path: 'listarUsuario',
+    component: ListarPostagemComponent
   }
 ];
 

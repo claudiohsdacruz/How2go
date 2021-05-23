@@ -31,7 +31,7 @@ export class UsuarioService {
                     if(usuario.email==email) {
                       this.usuario_logado.shift()
                       this.usuario_logado.push(usuario)
-                      let id = usuario.id.toString();
+                      let id = usuario.idUsuario.toString();
                       localStorage.setItem("id", id)
                       
                     }
@@ -44,19 +44,17 @@ export class UsuarioService {
     if(usuario.foto==undefined) {
       usuario.foto = '../../../assets/usuario/default.png'
     }
-    this.usuario_logado.shift();
-    this.usuario_logado.push(usuario);   
     console.log(this.usuario_logado)
     return this.httpClient.post<Usuario>(this.URL_USUARIOS, usuario);   
   }
 
   atualizar(usuario: Usuario): Observable<Usuario> {
-    return this.httpClient.put<Usuario>(`${this.URL_USUARIOS}${usuario.id}`, usuario)
+    return this.httpClient.put<Usuario>(`${this.URL_USUARIOS}${usuario.idUsuario}`, usuario)
   }
 
   sair(){
     const user =  {
-      id:undefined,
+      idUsuario:undefined,
       email:undefined,
       senha: undefined,
       nome: undefined,
