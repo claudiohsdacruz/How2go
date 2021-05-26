@@ -40,13 +40,14 @@ input[type="file"]{
 
 .button-enviar-foto .arq .file{
     align-self: center;
-    margin-left: 10%;
+    margin-left: 5%;
 }
 
-// label:first-child {
-//     color: rgb(119, 118, 118);
-// }
-
+.file {  
+    width: 280px;
+    display: flex;
+    flex-wrap: wrap;
+}
 
 mat-icon{
     font-size: 20px;

@@ -26,9 +26,11 @@
             <div class="arq">
                 <label for="arquivo"><mat-icon>add_a_photo</mat-icon></label>
                 <input name="arquivo" type="file" id="arquivo" multiple (change)="uploadFotos($event)">
-                <label for="arquivo" class="file" *ngFor="let foto of nomeFotos">{{foto}}</label>  
+                <div class="file">
+                    <label for="arquivo" style="margin-left: 5px; width: 35%;" *ngFor="let foto of nomeFotos">{{foto}}</label>
+                </div>
+                  
             </div>
-            <label>{{nomeFotos[0]}}</label>
         </div>
          
         <div class="example-button-container">

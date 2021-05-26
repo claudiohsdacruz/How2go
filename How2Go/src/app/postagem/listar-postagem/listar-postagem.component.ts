@@ -23,7 +23,8 @@ export class ListarPostagemComponent implements OnInit {
   ngOnInit(): void {  
     this.postagemService.listar().subscribe(
       postagens =>{
-        for(let p=0; p<=this.postagens.length; p++) {
+       let tamanho = this.postagens.length;
+        for(let p=0; p<tamanho; p++) {
           this.postagens.shift();
         }
         for(let post of postagens){        
@@ -47,7 +48,7 @@ export class ListarPostagemComponent implements OnInit {
     }    
   }
 
-  clickLike(postagem: Postagem): number {
+  clickLike(postagem: Postagem): void { 
     return this.postagemService.clickLike(postagem);
   }
 
@@ -75,6 +76,10 @@ export class ListarPostagemComponent implements OnInit {
         }
       }
     )
+  }
+
+  abrirDialogLogin():void {
+    this.dialogService.openDialogLoginUsuario();
   }
   
 }

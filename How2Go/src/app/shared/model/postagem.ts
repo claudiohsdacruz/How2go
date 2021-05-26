@@ -9,5 +9,5 @@ export class Postagem {
     descricao: string;
     fotos: Array<string>;
     comentarios : Array<string>;
-    like: number = 0;
+    like: number;
 }

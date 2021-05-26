@@ -31,8 +31,12 @@ export class PostagemService {
     return this.httpClient.post<Postagem>(this.URL_POSTAGENS, postagem);   
   }
 
-  remover(id:number): Observable<object>{
+  remover(id: number): Observable<object>{
     return this.httpClient.delete(`${this.URL_POSTAGENS}${id}`);
+  }
+
+  filtrar(value: String): Observable<Postagem[]> {
+    return this.httpClient.get<Postagem[]>(`${this.URL_POSTAGENS}destino/${value}`);
   }
 
   inserirComentario(postagem:Postagem,comentario:string): Observable<Postagem>{
@@ -41,14 +45,8 @@ export class PostagemService {
     return this.httpClient.put<Postagem>(`${this.URL_POSTAGENS}`,postagem)
   }
 
-  clickLike(postagem: Postagem): number {
-    if(postagem.like==0) {
-      postagem.like+=1;
-    }
-    else{
-      postagem.like-=1;
-    }
-    return postagem.like;
+  clickLike(postagem: Postagem): void {
+    
   }
  
    //-----------------------------------UPLOAD FOTOS-----------------------------------

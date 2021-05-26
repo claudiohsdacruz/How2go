@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-
 // @JsonIdentityInfo(scope = Postagem.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "idPostagem")
 @Entity
 public class Postagem {
@@ -25,6 +24,7 @@ public class Postagem {
    private String locais;
    private String[] fotos;
    private String[] comentarios;
+//    private String[] like;
 	
    @ManyToOne
    @JoinColumn(name="usuario_id")
@@ -83,6 +83,12 @@ public class Postagem {
 	public void setComentarios(String[] comentarios) {
 		this.comentarios = comentarios;
 	}
+	// public String[] getLike() {
+	// 	return like;
+	// }
+	// public void setLike(String[] like) {
+	// 	this.like = like;
+	// }
 
 	@Override
 	public String toString() {

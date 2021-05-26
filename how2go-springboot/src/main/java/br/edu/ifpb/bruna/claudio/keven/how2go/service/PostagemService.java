@@ -22,8 +22,9 @@ public class PostagemService {
        return this.postagemRepository.findById(idPostagem).orElse(null);
    }
 
-   public List<Postagem> getPostagemPorDestino(String destino) {
-    return this.postagemRepository.findByDestinoAndTitulo(destino,"www");
+   @Transactional
+   public List<Postagem> getPostagensDestino(String destino) {
+    return this.postagemRepository.getPostagensDestino(destino);
     }
     
    @Transactional

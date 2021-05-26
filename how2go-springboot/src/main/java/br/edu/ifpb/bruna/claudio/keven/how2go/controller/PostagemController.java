@@ -33,7 +33,7 @@ public class PostagemController {
 
    @GetMapping("/destino/{destino}")
    public List<Postagem> getPostagemPorDestino(@PathVariable("destino") String destino) {
-    return this.postagemService.getPostagemPorDestino(destino);
+    return this.postagemService.getPostagensDestino(destino);
     }
 
    @PostMapping("/")

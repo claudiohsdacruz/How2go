@@ -3,6 +3,7 @@ import { DialogService } from 'src/app/shared/services/dialog.service';
 import { POSTAGENS_LISTAR } from 'src/app/shared/model/postagens_listar';
 import {usuarioLogado} from '../../shared/model/usuario_logado';
 import { UsuarioService } from 'src/app/shared/services/usuario.service';
+import { PostagemService } from 'src/app/shared/services/postagem.service';
 
 
 @Component({
@@ -13,9 +14,9 @@ import { UsuarioService } from 'src/app/shared/services/usuario.service';
 
 export class MenuComponent implements OnInit {
   usuario_logado = usuarioLogado; 
-  postagens = POSTAGENS_LISTAR;
+  postagens_listar = POSTAGENS_LISTAR;
 
-  constructor(private dialogService: DialogService, private usuarioService: UsuarioService) { }
+  constructor(private dialogService: DialogService, private usuarioService: UsuarioService, private postagemService: PostagemService) { }
   
   ngOnInit(): void {
     let id = localStorage.getItem("id");
@@ -43,9 +44,34 @@ export class MenuComponent implements OnInit {
     this.dialogService.openDialogLoginUsuario();
   }
 
-  // filtrar(value: string): void {
-  //   this.postagemService.pesquisar(value);
-  // } 
+  filtrar(value: string): void {
+    if(value=='') {
+      this.postagemService.listar().subscribe(
+        postagens =>{
+         let tamanho = this.postagens_listar.length;
+          for(let p=0; p<tamanho; p++) {
+            this.postagens_listar.shift();
+          }
+          for(let post of postagens){        
+            this.postagens_listar.push(post)
+          }
+        }     
+      );
+    }
+    else{
+      this.postagemService.filtrar(value).subscribe(
+        postagens => {
+          let tamanho = this.postagens_listar.length;
+          for(let i=0; i<tamanho; i++) {
+            this.postagens_listar.shift()   
+          }
+          for(let postagem of postagens) {
+            this.postagens_listar.push(postagem) 
+          }     
+        }
+      );
+    }  
+  } 
 
   sair(): void {
     this.usuarioService.sair();

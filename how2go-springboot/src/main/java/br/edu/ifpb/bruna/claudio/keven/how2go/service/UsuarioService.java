@@ -22,9 +22,11 @@ public class UsuarioService {
        return this.usuarioRepository.findById(idUsuario).orElse(null);
    }
 
-   public Usuario getUsuarioPorEmail(String email) {
-    return this.usuarioRepository.findByEmail(email);
-    }
+   @Transactional
+    public Usuario getUsuarioPorEmail(String email) {
+        return this.usuarioRepository.findByEmail(email);
+        }
+    
     public Usuario getUsuarioPorEmailESenha(String email,String senha) {
         return this.usuarioRepository.findByEmailAndSenha(email,senha);
         }
