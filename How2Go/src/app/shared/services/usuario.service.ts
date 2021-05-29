@@ -3,6 +3,7 @@ import {Observable, Subscriber} from 'rxjs';
 import { usuarioLogado } from '../model/usuario_logado';
 import { Usuario } from '../model/usuario';
 import { HttpClient } from '@angular/common/http';
+import { MensagemService } from './mensagem.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,26 +26,21 @@ export class UsuarioService {
     return this.httpClient.get<Usuario>(`${this.URL_USUARIOS}${id}`);
   }
 
-  entrar(email: string, senha: string):void {
-    this.listar().subscribe(
-      usuarios => {for(let usuario of usuarios) {
-                    if(usuario.email==email) {
-                      this.usuario_logado.shift()
-                      this.usuario_logado.push(usuario)
-                      let id = usuario.idUsuario.toString();
-                      localStorage.setItem("id", id)
-                      
-                    }
-                  }
-      }
-    );
- }
+  getUsuarioPorEmail(email: string): Observable<Usuario> {
+    return this.httpClient.get<Usuario>(`${this.URL_USUARIOS}email/${email}`);
+  }
+
+  entrar(usuario: Usuario): void {   
+            this.usuario_logado.shift();
+            this.usuario_logado.push(usuario)
+            let id = usuario.idUsuario.toString();
+            localStorage.setItem("id", id);    
+  }
 
   cadastrar(usuario: Usuario): Observable<Usuario> {
     if(usuario.foto==undefined) {
       usuario.foto = '../../../assets/usuario/default.png'
     }
-    console.log(this.usuario_logado)
     return this.httpClient.post<Usuario>(this.URL_USUARIOS, usuario);   
   }
 

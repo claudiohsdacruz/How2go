@@ -15,6 +15,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AbrirImagemComponent } from './abrir-imagem/abrir-imagem.component';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatTabsModule} from '@angular/material/tabs';
+
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatExpansionModule,
     MatDialogModule,
     MatBadgeModule,
+    MatTabsModule,
   ]
 })
 export class PostagemModule { }

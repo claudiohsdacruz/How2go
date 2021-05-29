@@ -1,5 +1,5 @@
 <div class="card-postagem">
-  <mat-card class="example-card" *ngFor="let p of postagens">
+  <mat-card class="example-card" *ngFor="let p of postagens; index as i">
     <mat-card-header>
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="mat-icon-menu" *ngIf="usuario_logado[0].email==p.usuario.email">
         <mat-icon>more_vert</mat-icon>
@@ -37,9 +37,11 @@
       </mat-form-field>
     <div>    
       <mat-card-actions class="card-buttons">
-        <button mat-raised-button color="primary" *ngIf="usuario_logado[0].email==undefined" (click)="abrirDialogLogin()">Comentar</button>
-        <button mat-raised-button color="primary" *ngIf="usuario_logado[0].email!=undefined" (click)="inserirComentario(p,comentario.value)" >Comentar</button>
-        <button mat-raised-button matBadge="{{p.like}}" (click)="clickLike(p)" class="comentario-like"><mat-icon>thumb_up</mat-icon></button>
+        <button mat-raised-button color="primary" *ngIf="usuario_logado[0].email==undefined" (click)="abrirDialogLogin()" style="background-color: rgb(255, 98, 41);">Comentar</button>
+        <button mat-raised-button color="primary" *ngIf="usuario_logado[0].email!=undefined" (click)="inserirComentario(p,comentario.value)" style="background-color: rgb(255, 98, 41);" >Comentar</button>
+        <button *ngIf="usuario_logado[0].idUsuario==undefined" mat-raised-button matBadge="{{p.likes.length}}" matBadgeColor="warn" (click)="abrirDialogLogin()" class="comentario-like"><mat-icon>thumb_up</mat-icon></button>
+        <button *ngIf="usuario_logado[0].idUsuario!=undefined && p.likes.includes(usuario_logado[0].idUsuario.toString(),0)"  mat-raised-button matBadge="{{p.likes.length}}" matBadgeColor="warn" (click)="clickLike(p)" class="comentario-like likeAtivo"><mat-icon>thumb_up</mat-icon></button>
+        <button *ngIf="usuario_logado[0].idUsuario!=undefined && !p.likes.includes(usuario_logado[0].idUsuario.toString(),0)" mat-raised-button matBadge="{{p.likes.length}}" matBadgeColor="warn" (click)="clickLike(p)" class="comentario-like"><mat-icon>thumb_up</mat-icon></button>
       </mat-card-actions>
     </div>
     </div>
@@ -53,7 +55,7 @@
         </mat-expansion-panel-header>
     
         <div class="mat-panel-comentario" *ngFor="let c of p.comentarios; index as i">
-          <mat-panel-title *ngIf="i%2===0">
+          <mat-panel-title *ngIf="i%2===0" style="font-weight: bold;">
            {{p.comentarios[i] | titlecase }}:
          </mat-panel-title>
          <mat-panel-description *ngIf="i%2===1" style="margin-left: 5px; color: black;">

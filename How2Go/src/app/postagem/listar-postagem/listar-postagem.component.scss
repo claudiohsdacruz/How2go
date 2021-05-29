@@ -44,6 +44,11 @@
     background-color: rgb(211, 211, 211);
 }
 
+.likeAtivo {
+    background-color: rgb(45, 137, 165);
+    color: white;
+}
+
 .comentario-area {
     width: 50%;
 }
@@ -54,7 +59,7 @@
 }
 
 .mat-panel-comentario {
-    margin-top: 10px;
+    margin-top: 5px;
     // border: solid 2px rgb(202, 213, 214);
     // border-radius: 3%;
 }
@@ -68,3 +73,4 @@
     position: absolute;
     right: 0%;
 }
+

@@ -8,7 +8,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {PostagemModule } from './postagem/postagem.module';
 import { HttpClientModule } from '@angular/common/http';
 import { UsuarioModule } from './usuario/usuario.module';
-import {FirestoreModule} from './firestore/firestore.module';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { InterceptadorModule } from './interceptador/interceptador.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {FirestoreModule} from './firestore/firestore.module';
     PostagemModule,
     HttpClientModule,
     UsuarioModule,
-    FirestoreModule
+    MatSnackBarModule,
+    InterceptadorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

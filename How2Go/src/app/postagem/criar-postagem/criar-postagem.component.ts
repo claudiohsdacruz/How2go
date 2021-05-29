@@ -3,6 +3,7 @@ import {Postagem} from '../../shared/model/postagem';
 import { PostagemService } from 'src/app/shared/services/postagem.service';
 import { usuarioLogado } from 'src/app/shared/model/usuario_logado';
 import { Router } from '@angular/router';
+import { MensagemService } from 'src/app/shared/services/mensagem.service';
 
 @Component({
   selector: 'app-criar-postagem',
@@ -15,7 +16,7 @@ export class CriarPostagemComponent implements OnInit {
   fotos = new Array<string>();
   usuario = usuarioLogado;
   
-  constructor(private postagemService: PostagemService, private roteador: Router) {
+  constructor(private postagemService: PostagemService, private roteador: Router, private mensagemService: MensagemService) {
     this.postagem = new Postagem();
    }
 
@@ -23,10 +24,18 @@ export class CriarPostagemComponent implements OnInit {
   }
    
   inserirPostagem(): void {
-    this.postagem.usuario = this.usuario[0];  
-    this.postagemService.inserir(this.postagem).subscribe(
-      postagem => this.roteador.navigate(['listarPostagens'])
-    );
+    if(this.postagem.titulo=='' || this.postagem.descricao=='' || this.postagem.destino=='' || this.postagem.locais=='' || this.postagem.fotos==undefined) {
+      this.mensagemService.snackAviso('Preencha todos os campos')
+    }
+    else{
+      this.postagem.usuario = this.usuario[0]; 
+      this.postagemService.inserir(this.postagem).subscribe(
+        postagem => {
+          this.mensagemService.snackSucesso('Postagem criada com sucesso')
+          this.roteador.navigate(['listarPostagens'])
+        }
+      );
+    } 
   }
 
   uploadFotos($event:Event): void{

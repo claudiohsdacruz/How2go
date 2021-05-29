@@ -4,6 +4,7 @@ import { POSTAGENS_LISTAR } from 'src/app/shared/model/postagens_listar';
 import {usuarioLogado} from '../../shared/model/usuario_logado';
 import { UsuarioService } from 'src/app/shared/services/usuario.service';
 import { PostagemService } from 'src/app/shared/services/postagem.service';
+import { MensagemService } from 'src/app/shared/services/mensagem.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class MenuComponent implements OnInit {
   usuario_logado = usuarioLogado; 
   postagens_listar = POSTAGENS_LISTAR;
 
-  constructor(private dialogService: DialogService, private usuarioService: UsuarioService, private postagemService: PostagemService) { }
+  constructor(private dialogService: DialogService, private usuarioService: UsuarioService, private postagemService: PostagemService, private mensagemService: MensagemService) { }
   
   ngOnInit(): void {
     let id = localStorage.getItem("id");
@@ -61,9 +62,12 @@ export class MenuComponent implements OnInit {
     else{
       this.postagemService.filtrar(value).subscribe(
         postagens => {
-          let tamanho = this.postagens_listar.length;
+          let tamanho = this.postagens_listar.length;       
           for(let i=0; i<tamanho; i++) {
             this.postagens_listar.shift()   
+          }
+          if(this.postagens_listar.length==0) {
+            this.mensagemService.snackAviso('Nenhuma postagem encontrada')
           }
           for(let postagem of postagens) {
             this.postagens_listar.push(postagem) 

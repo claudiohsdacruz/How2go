@@ -6,6 +6,7 @@ import { POSTAGENS_LISTAR } from 'src/app/shared/model/postagens_listar';
 import {usuarioLogado} from '../../shared/model/usuario_logado';
 import { PostagemService } from 'src/app/shared/services/postagem.service';
 
+
 @Component({
   selector: 'app-listar-postagem',
   templateUrl: './listar-postagem.component.html',
@@ -49,8 +50,11 @@ export class ListarPostagemComponent implements OnInit {
   }
 
   clickLike(postagem: Postagem): void { 
-    return this.postagemService.clickLike(postagem);
+    this.postagemService.clickLike(postagem).subscribe(
+      ()=> undefined
+    );
   }
+
 
   filtrar(value: string): void {
     let posts: Postagem[]

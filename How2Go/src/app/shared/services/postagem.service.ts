@@ -5,7 +5,6 @@ import {Postagem} from '../../shared/model/postagem';
 import { usuarioLogado } from '../model/usuario_logado';
 import { UsuarioService } from './usuario.service';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -25,14 +24,19 @@ export class PostagemService {
 
   inserir(postagem: Postagem): Observable<Postagem> {
     if(postagem.fotos==undefined) {
-      postagem.fotos=[]
+      postagem.fotos = []
     }
     postagem.comentarios = [];
+    postagem.likes = []
     return this.httpClient.post<Postagem>(this.URL_POSTAGENS, postagem);   
   }
 
   remover(id: number): Observable<object>{
     return this.httpClient.delete(`${this.URL_POSTAGENS}${id}`);
+  }
+
+  atualizar(postagem: Postagem): Observable<Postagem> {
+    return this.httpClient.put<Postagem>(`${this.URL_POSTAGENS}`, postagem)
   }
 
   filtrar(value: String): Observable<Postagem[]> {
@@ -42,11 +46,21 @@ export class PostagemService {
   inserirComentario(postagem:Postagem,comentario:string): Observable<Postagem>{
     postagem.comentarios.push(this.usuario_logado[0].nome);
     postagem.comentarios.push(comentario);
-    return this.httpClient.put<Postagem>(`${this.URL_POSTAGENS}`,postagem)
+    return this.atualizar(postagem);
   }
 
-  clickLike(postagem: Postagem): void {
-    
+  clickLike(postagem: Postagem): Observable<Postagem> {
+    if (!postagem.likes.includes(this.usuario_logado[0].idUsuario.toString(),0)){
+      postagem.likes.push(this.usuario_logado[0].idUsuario.toString());
+    }
+    else{
+      for(let i in postagem.likes){
+        if(postagem.likes[i]==this.usuario_logado[0].idUsuario.toString()){
+          postagem.likes.splice(Number(i),1);
+        }
+      }
+    }
+    return this.atualizar(postagem);
   }
  
    //-----------------------------------UPLOAD FOTOS-----------------------------------
