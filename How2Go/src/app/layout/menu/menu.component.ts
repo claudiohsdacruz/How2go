@@ -66,12 +66,12 @@ export class MenuComponent implements OnInit {
           for(let i=0; i<tamanho; i++) {
             this.postagens_listar.shift()   
           }
-          if(this.postagens_listar.length==0) {
-            this.mensagemService.snackAviso('Nenhuma postagem encontrada')
-          }
           for(let postagem of postagens) {
             this.postagens_listar.push(postagem) 
-          }     
+          } 
+          if(this.postagens_listar.length==0) {   
+            this.mensagemService.snackInfo('Nenhuma postagem encontrada')
+          }    
         }
       );
     }  

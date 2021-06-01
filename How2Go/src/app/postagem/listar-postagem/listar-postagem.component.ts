@@ -5,6 +5,7 @@ import {DialogService} from '../../shared/services/dialog.service';
 import { POSTAGENS_LISTAR } from 'src/app/shared/model/postagens_listar';
 import {usuarioLogado} from '../../shared/model/usuario_logado';
 import { PostagemService } from 'src/app/shared/services/postagem.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class ListarPostagemComponent implements OnInit {
   postagens = POSTAGENS_LISTAR;
   usuario_logado = usuarioLogado;
   
-  constructor(private postagemService: PostagemService, public dialog: MatDialog, private dialogService: DialogService) { 
+  constructor(private postagemService: PostagemService, public dialog: MatDialog, private dialogService: DialogService, private roteador: Router) { 
     
   }
 
@@ -36,6 +37,10 @@ export class ListarPostagemComponent implements OnInit {
         } 
       }     
     );
+  }
+
+  editar(postagem: Postagem): void {
+    this.roteador.navigate(['editarPostagem/', postagem.idPostagem])
   }
 
   openDialogAbrirImagem(postagem: Postagem): void {

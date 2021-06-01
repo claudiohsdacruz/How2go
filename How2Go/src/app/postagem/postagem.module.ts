@@ -16,17 +16,20 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { AbrirImagemComponent } from './abrir-imagem/abrir-imagem.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatTabsModule} from '@angular/material/tabs';
-
+import { EditarPostagemComponent } from './editar-postagem/editar-postagem.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 @NgModule({
   declarations: [
     CriarPostagemComponent,
     ListarPostagemComponent,
-    AbrirImagemComponent
+    AbrirImagemComponent,
+    EditarPostagemComponent,
   ],
   exports: [
     CriarPostagemComponent,
-    ListarPostagemComponent
+    ListarPostagemComponent,
+    EditarPostagemComponent
   ],
 
   imports: [
@@ -44,6 +47,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatDialogModule,
     MatBadgeModule,
     MatTabsModule,
+    CarouselModule.forRoot(),
   ]
 })
 export class PostagemModule { }

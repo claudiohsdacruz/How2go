@@ -21,6 +21,9 @@ export class PostagemService {
     return this.httpClient.get<Postagem[]>(this.URL_POSTAGENS);
   }
 
+  getPostagem(id: number): Observable<Postagem> {
+    return this.httpClient.get<Postagem>(`${this.URL_POSTAGENS}id/${id}`)
+  }
 
   inserir(postagem: Postagem): Observable<Postagem> {
     if(postagem.fotos==undefined) {

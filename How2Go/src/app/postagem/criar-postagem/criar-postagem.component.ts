@@ -24,7 +24,7 @@ export class CriarPostagemComponent implements OnInit {
   }
    
   inserirPostagem(): void {
-    if(this.postagem.titulo=='' || this.postagem.descricao=='' || this.postagem.destino=='' || this.postagem.locais=='' || this.postagem.fotos==undefined) {
+    if(this.postagem.titulo==undefined || this.postagem.descricao==undefined || this.postagem.destino==undefined || this.postagem.locais==undefined || this.postagem.fotos==undefined) {
       this.mensagemService.snackAviso('Preencha todos os campos')
     }
     else{

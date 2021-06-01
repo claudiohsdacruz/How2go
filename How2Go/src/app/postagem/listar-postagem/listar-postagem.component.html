@@ -5,7 +5,7 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>
+        <button mat-menu-item (click)="editar(p)">
           <mat-icon>edit</mat-icon>
           <span>Editar postagem</span>
         </button>
@@ -19,10 +19,12 @@
       <mat-card-title>{{p.titulo}}</mat-card-title>
       <mat-card-subtitle>Destino: {{p.destino}}</mat-card-subtitle>   
     </mat-card-header>
-    <img mat-card-image *ngIf="p.fotos.length >= 1" src={{p.fotos[0]}} class="card-img"> 
-    <button mat-button (click)="openDialogAbrirImagem(p)" *ngIf="p.fotos.length > 1" class="button-verMais">
-      <mat-icon>collections</mat-icon>
-    </button> 
+    <carousel>
+      <slide *ngFor="let foto of p.fotos">
+        <img src="{{foto}}" style="display: block; width: 100%; height: 320px;">
+      </slide>
+    </carousel>
+    <br>
     <mat-card-subtitle>Locais a visitar: {{p.locais}}</mat-card-subtitle>
     <mat-card-content>
       <p>
