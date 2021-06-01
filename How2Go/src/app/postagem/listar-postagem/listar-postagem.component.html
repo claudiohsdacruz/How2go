@@ -59,11 +59,16 @@
         <div class="mat-panel-comentario" *ngFor="let c of p.comentarios; index as i">
           <mat-panel-title *ngIf="i%2===0" style="font-weight: bold;">
            {{p.comentarios[i] | titlecase }}:
+           <button *ngIf="p.comentarios[i]==usuario_logado[0].nome || p.usuario.idUsuario==usuario_logado[0].idUsuario" mat-icon-button (click)="removerComentario(p, i)" style="position: absolute; right: 1.6%;">
+            <mat-icon>delete</mat-icon>
+          </button>
          </mat-panel-title>
          <mat-panel-description *ngIf="i%2===1" style="margin-left: 5px; color: black;">
           {{p.comentarios[i]}}
          </mat-panel-description>
+         
        </div>
+       
       
       </mat-expansion-panel>
         <mat-expansion-panel (opened)="panelOpenState = true"

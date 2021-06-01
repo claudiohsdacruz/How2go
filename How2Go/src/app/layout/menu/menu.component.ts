@@ -5,6 +5,8 @@ import {usuarioLogado} from '../../shared/model/usuario_logado';
 import { UsuarioService } from 'src/app/shared/services/usuario.service';
 import { PostagemService } from 'src/app/shared/services/postagem.service';
 import { MensagemService } from 'src/app/shared/services/mensagem.service';
+import { Usuario } from 'src/app/shared/model/usuario';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +19,7 @@ export class MenuComponent implements OnInit {
   usuario_logado = usuarioLogado; 
   postagens_listar = POSTAGENS_LISTAR;
 
-  constructor(private dialogService: DialogService, private usuarioService: UsuarioService, private postagemService: PostagemService, private mensagemService: MensagemService) { }
+  constructor(private dialogService: DialogService, private usuarioService: UsuarioService, private postagemService: PostagemService, private mensagemService: MensagemService, private roteador: Router) { }
   
   ngOnInit(): void {
     let id = localStorage.getItem("id");
@@ -35,6 +37,14 @@ export class MenuComponent implements OnInit {
         }
       );
     }
+  }
+
+  editarPerfil(usuario: Usuario): void {
+    this.roteador.navigate(['editarPerfil/', usuario.idUsuario])
+  }
+
+  minhasPostagens(usuario: Usuario): void {
+    this.roteador.navigate(['minhasPostagens/', usuario.idUsuario])
   }
 
   openDialogCadastroUsuario():void{

@@ -8,11 +8,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
 
 @NgModule({
   declarations: [
     CadastrarUsuarioComponent,
-    LogarUsuarioComponent
+    LogarUsuarioComponent,
+    EditarUsuarioComponent
   ],
   exports:[
     CadastrarUsuarioComponent,

@@ -21,6 +21,10 @@ export class PostagemService {
     return this.httpClient.get<Postagem[]>(this.URL_POSTAGENS);
   }
 
+  listarPostagensUsuario(idUsuario: number): Observable<Postagem[]> {
+    return this.httpClient.get<Postagem[]>(`${this.URL_POSTAGENS}minhasPostagens/${idUsuario}`);
+  }
+
   getPostagem(id: number): Observable<Postagem> {
     return this.httpClient.get<Postagem>(`${this.URL_POSTAGENS}id/${id}`)
   }

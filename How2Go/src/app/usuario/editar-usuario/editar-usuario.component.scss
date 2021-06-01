@@ -2,16 +2,14 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: rgb(45, 145, 175);
-    height: 100vh;
+    height: 80vh;
 }
 
 .card-cadastro-usuario {
     display: flex;
     flex-direction: column;
-    padding-top: 3%;
     align-items: center;
-    width: 80%;   
+    width: 50%;   
     margin-top: 1%;   
     
 }
@@ -59,6 +57,11 @@ input[type="file"]{
 }
 .add-foto:hover{
     background: rgb(120, 212, 212);
+}
+
+.iconePerfil {
+    width: 100px; 
+    height: 100px;
 }
 
 .example-button-container {

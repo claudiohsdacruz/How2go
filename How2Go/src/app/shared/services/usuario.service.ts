@@ -45,7 +45,7 @@ export class UsuarioService {
   }
 
   atualizar(usuario: Usuario): Observable<Usuario> {
-    return this.httpClient.put<Usuario>(`${this.URL_USUARIOS}${usuario.idUsuario}`, usuario)
+    return this.httpClient.put<Usuario>(`${this.URL_USUARIOS}atualizar-usuario`, usuario)
   }
 
   sair(){

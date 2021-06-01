@@ -24,9 +24,9 @@
     
     <mat-menu #menu="matMenu" class="menu-itens">
         <div *ngIf="usuario_logado[0].nome!=undefined">
-            <button mat-menu-item>Editar perfil</button>
-            <button mat-menu-item [routerLink]="['/listarPostagens']">Minhas postagens</button>
-            <button mat-menu-item (click)="sair()" [routerLink]="['/listarUsuario']">Sair</button>
+            <button mat-menu-item (click)="editarPerfil(usuario_logado[0])">Editar perfil</button>
+            <button mat-menu-item (click)="minhasPostagens(usuario_logado[0])">Minhas postagens</button>
+            <button mat-menu-item (click)="sair()" [routerLink]="['/']">Sair</button>
         </div>
         <div *ngIf="usuario_logado[0].nome==undefined">
             <button mat-menu-item (click)="openDialogLoginUsuario()">Entrar</button>

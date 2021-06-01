@@ -50,8 +50,7 @@ export class CriarPostagemComponent implements OnInit {
     for(let i=0;i<tamanhoFiles;i++) {
       this.nomeFotos.push(files[i].name)
     }
-
-    console.log(this.nomeFotos)
+    
     this.postagem.fotos=this.postagemService.uploadFotos($event);
   }
 }

@@ -5,7 +5,7 @@ import {DialogService} from '../../shared/services/dialog.service';
 import { POSTAGENS_LISTAR } from 'src/app/shared/model/postagens_listar';
 import {usuarioLogado} from '../../shared/model/usuario_logado';
 import { PostagemService } from 'src/app/shared/services/postagem.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -18,11 +18,27 @@ export class ListarPostagemComponent implements OnInit {
   postagens = POSTAGENS_LISTAR;
   usuario_logado = usuarioLogado;
   
-  constructor(private postagemService: PostagemService, public dialog: MatDialog, private dialogService: DialogService, private roteador: Router) { 
+  constructor(private postagemService: PostagemService, public dialog: MatDialog, private dialogService: DialogService, private roteador: Router, private rotaAtual:ActivatedRoute) { 
     
   }
 
   ngOnInit(): void {  
+   let id = this.rotaAtual.snapshot.paramMap.get('idUsuario');
+   if(id) {
+    this.postagemService.listarPostagensUsuario(Number(id)).subscribe(
+      postagens => {
+        let tamanho = this.postagens.length;
+        for(let p=0; p<tamanho; p++) {
+          this.postagens.shift();
+        }
+        for(let post of postagens){        
+          this.postagens.push(post)
+        }
+      }
+    );
+   
+   }
+   else{
     this.postagemService.listar().subscribe(
       postagens =>{
        let tamanho = this.postagens.length;
@@ -37,6 +53,7 @@ export class ListarPostagemComponent implements OnInit {
         } 
       }     
     );
+   } 
   }
 
   editar(postagem: Postagem): void {
@@ -52,6 +69,13 @@ export class ListarPostagemComponent implements OnInit {
       this.postagemService.inserirComentario(postagem,comentario).subscribe(
         ); 
     }    
+  }
+
+  removerComentario(postagem: Postagem, index: number): void {
+    postagem.comentarios.splice(index, 2);
+    this.postagemService.atualizar(postagem).subscribe(
+      () => undefined
+    );
   }
 
   clickLike(postagem: Postagem): void { 

@@ -4,6 +4,7 @@ import { CriarPostagemComponent } from './postagem/criar-postagem/criar-postagem
 import { EditarPostagemComponent } from './postagem/editar-postagem/editar-postagem.component';
 import { ListarPostagemComponent } from './postagem/listar-postagem/listar-postagem.component';
 import {CadastrarUsuarioComponent} from './usuario/cadastrar-usuario/cadastrar-usuario.component';
+import { EditarUsuarioComponent } from './usuario/editar-usuario/editar-usuario.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   },
   {
     path: 'listarPostagens',
+    component: ListarPostagemComponent
+  },
+  {
+    path: 'minhasPostagens/:idUsuario',
     component: ListarPostagemComponent
   },
   {
@@ -29,7 +34,11 @@ const routes: Routes = [
   {
     path: 'listarUsuario',
     component: ListarPostagemComponent
-  }
+  },
+  {
+    path: 'editarPerfil/:id',
+    component: EditarUsuarioComponent
+  },
 ];
 
 @NgModule({
