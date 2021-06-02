@@ -10,7 +10,7 @@ public interface PostagemRepository extends JpaRepository<Postagem, Long> {
 
    List<Postagem> findByDestino(String destino);
 
-   @Query("SELECT p FROM Postagem p where p.destino like %:destino%")
+   @Query("SELECT p FROM Postagem p where lower(p.destino) like lower(concat('%', :destino,'%'))")
    public List<Postagem> getPostagensDestino(String destino);
 
    @Query("SELECT p from Postagem p where p.usuario.idUsuario =:idUsuario" )
