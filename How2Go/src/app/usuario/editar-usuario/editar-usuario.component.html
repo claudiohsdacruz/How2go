@@ -11,7 +11,13 @@
             <input matInput [(ngModel)]="usuario.email">
         </mat-form-field>
 
-       
+        <h3>Alterar Senha
+            <button mat-icon-button  (click)="alterarSenha()">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </h3>
+         
+
         <div style="display: flex; justify-content: center; width: 100%;">
             <mat-form-field appearance="fill" *ngIf="!senhaEdit">
                 <mat-label>Digite sua senha antiga</mat-label>
@@ -21,12 +27,7 @@
             <mat-form-field appearance="fill" *ngIf="senhaEdit">
                 <mat-label>Digite sua senha antiga</mat-label>
                 <input matInput  [(ngModel)]="senha1" type="password"> 
-            </mat-form-field>
-        
-            <button mat-icon-button style="position: absolute; right: 10%;" (click)="alterarSenha()">
-                <mat-icon>edit</mat-icon>
-            </button>   
-
+            </mat-form-field>  
         </div>
 
         <mat-form-field appearance="fill" *ngIf="!senhaEdit">
@@ -38,6 +39,8 @@
             <mat-label>Digite sua nova senha</mat-label>
             <input matInput  [(ngModel)]="senha2" type="password"> 
         </mat-form-field>
+
+        <h3>Alterar Foto de Perfil</h3>
 
         <div class="button-enviar-foto"> 
           <label>Enviar Foto</label>

@@ -37,35 +37,49 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   editarUsuario(): void{
-    if(this.usuario.nome==undefined || this.usuario.email==undefined) {
-      this.mensagemService.snackAviso('Preencha todos os campos');
-    }   
-    else{
-      this.usuario.nome = this.usuario.nome.toLowerCase();
-      let usuarioEmail: Usuario;
-      this.usuarioService.getUsuarioPorEmail(this.usuario.email).subscribe(
-        usuario => {
-          usuarioEmail = usuario
-          if(usuarioEmail.email==this.usuario.email){
-            if (this.usuario.senha!=undefined && this.senha1==this.usuario.senha){
-              this.usuario.senha = this.senha2;
-              this.usuarioService.atualizar(this.usuario).subscribe(
-                 usuario => {
-                   this.mensagemService.snackSucesso('Usuario editado com sucesso');
-                   this.roteador.navigate(['listarPostagens'])
-                }
-              );
-            }
-            else{
-              this.mensagemService.snackErro('A senha antiga está incorreta.')
-            }
-          }
-          else if(usuarioEmail) {
-            this.mensagemService.snackErro('Email ja cadastrado. Tente novamente')
-          }      
-        }
-      );    
-    }
+    this.usuario.nome = this.usuario.nome.toLowerCase();
+   
+    if(this.usuario.nome=='' || this.usuario.email=='') {
+      this.mensagemService.snackAviso('Preencha todos os campos');  
+      return null;
+    } 
+ 
+    let usuarioEmail: Usuario;
+    this.usuarioService.getUsuarioPorEmail(this.usuario.email).subscribe(
+      usuario => {
+               usuarioEmail = usuario
+
+               if(usuarioEmail && usuarioEmail.idUsuario!=this.usuario.idUsuario) {
+                this.mensagemService.snackErro('Email ja cadastrado. Tente novamente');
+               } 
+
+               else{
+                  if (this.senhaEdit){
+                    if(usuario.senha==this.senha1) {
+                      this.usuario.senha = this.senha2;             
+                    }    
+                    else if(this.senha1==undefined && this.senha2==undefined){
+                      console.log(this.senhaEdit)
+                      this.mensagemService.snackAviso('Preencha os campos da senha ou desabilite-os');
+                      return null;
+                    }
+                    else {
+                      this.mensagemService.snackErro('A senha antiga digitada não é a mesma');
+                      return null;
+                    }
+                  }           
+                 
+                  this.usuarioService.atualizar(this.usuario).subscribe(
+                    usuario => {
+                      this.mensagemService.snackSucesso('Usuario editado com sucesso');
+                      this.usuarioService.entrar(usuario);
+                      this.roteador.navigate(['listarPostagens']);
+                  }
+                );
+              }
+                   
+              }
+    )
   }
 
   alterarSenha(): void {

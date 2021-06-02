@@ -35,7 +35,7 @@
     <div class="comentarios-buttons">
       <mat-form-field class="comentario-area">
         <mat-label>Digite o seu comentario</mat-label>
-        <textarea matInput #comentario></textarea>
+        <textarea matInput #comentario [(ngModel)]="comentarios"></textarea>
       </mat-form-field>
     <div>    
       <mat-card-actions class="card-buttons">

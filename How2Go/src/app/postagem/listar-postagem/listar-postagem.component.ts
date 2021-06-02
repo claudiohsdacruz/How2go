@@ -17,6 +17,7 @@ export class ListarPostagemComponent implements OnInit {
 
   postagens = POSTAGENS_LISTAR;
   usuario_logado = usuarioLogado;
+  comentarios = '';
   
   constructor(private postagemService: PostagemService, public dialog: MatDialog, private dialogService: DialogService, private roteador: Router, private rotaAtual:ActivatedRoute) { 
     
@@ -67,7 +68,9 @@ export class ListarPostagemComponent implements OnInit {
   inserirComentario(postagem:Postagem,comentario:string):void{    
     if(this.usuario_logado[0].idUsuario!=undefined) {
       this.postagemService.inserirComentario(postagem,comentario).subscribe(
-        ); 
+       () => undefined
+      ); 
+      this.comentarios = ''
     }    
   }
 

@@ -10,15 +10,15 @@
             Login/Cadastre-se
         </div>
     </button>
-    <div>
+    <div class="logo">
         <button mat-icon-button class="menu-button" [routerLink]="['/']">
-            <img src="../../../assets/logo.png" class="logo" (click)="voltar()" >
+            <img src="../../../assets/logo.png" (click)="voltar()" >
         </button>
     </div>
-    <div>
+    <div style="width: 20%;">
         <mat-form-field class="menu-pesquisar" appearance="fill">
             <mat-label>Pesquisar por destino</mat-label>
-            <input matInput type="text" #inputBuscar (keyup)="filtrar(inputBuscar.value)">
+            <input  matInput type="text" #inputBuscar (keyup)="filtrar(inputBuscar.value)">
         </mat-form-field>
     </div>    
     
